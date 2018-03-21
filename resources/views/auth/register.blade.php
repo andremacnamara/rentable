@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts/main')
 
 @section('content')
 <div class="container">
@@ -45,15 +45,15 @@
 
                         <!-- User Type -->
                         <div class="form-group row">
-                          <label for="user-type" class="col-md-4 col-form-label text-md-right">User Type</label>
+                          <label for="userType" class="col-md-4 col-form-label text-md-right">User Type</label>
                             <div class="col-md-6">
-                              <select class ="form-control" id="user-type" name="user-type">
+                              <select class ="form-control" id="userType" name="userType">
                                 <option>Landlord</option>
                                 <option>Tenant</option>
                               </select>
-                              @if ($errors->has('user-type'))
+                              @if ($errors->has('userType'))
                                   <span class="invalid-feedback">
-                                      <strong>{{ $errors->first('email') }}</strong>
+                                      <strong>{{ $errors->first('userType') }}</strong>
                                   </span>
                               @endif
                             </div>

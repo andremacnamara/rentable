@@ -20,3 +20,18 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 const app = new Vue({
     el: '#app'
 });
+
+$('.card-header').click(function(){
+  $('.card-header').hide();
+});
+//Script to preview image in upload form
+$("#myFile").change(function(event) {
+  var $previews = $(".previews").empty();
+  [].forEach.call(this.files, function(file) {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = function() {
+      $previews.append(`<img src="${this.result}" />`);
+    };
+  });
+});
