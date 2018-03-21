@@ -22,6 +22,7 @@
                   Getting all properties in a specific watchlists
                   WatchlistController - Show.
                 -->
+
                 
                 @foreach ($Watchlists->properties as $WatchedProperties)
                   <div class="col-md-4">
