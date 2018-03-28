@@ -7,6 +7,7 @@ use App\Http\Requests\UploadRequest;
 use App\PropertyAdvert;
 use App\PropertyAdvertPhoto;
 use DB;
+use App\User;
 use Auth;
 
 class AdvertisementController extends Controller
@@ -61,9 +62,10 @@ class AdvertisementController extends Controller
 
     public function show($id){
       //Shows add user clicked on based on id
-      $user = Auth::user();
+      $user = User::where('id', $id)->first();
       $Advert = PropertyAdvert::where('id', $id)->first();
       return view('pages/advert/show', compact('Advert', 'user'));
+      //dd($Advert)
     }
 
     public function edit($id){
@@ -98,6 +100,10 @@ class AdvertisementController extends Controller
           "user_id" => Auth::id(),
       ]);
       return redirect("/property/$id");
+    }
+
+    public function archive(){
+      return "Advert has been archived";
     }
 
 

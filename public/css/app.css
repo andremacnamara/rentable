@@ -11,10 +11,6 @@ header .name {
   margin-left: 10%;
 }
 
-header:hover {
-  color: red;
-}
-
 ul li {
   font-family: 'Open Sans', sans-serif;
 }
@@ -36,6 +32,59 @@ ul a:hover {
   background: no-repeat center center;
   background-size: cover;
   height: 200px;
+  -webkit-box-shadow: 0 4px 4px 2px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          box-shadow: 0 4px 4px 2px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.result-image {
+  position: relative;
+  background: no-repeat center center;
+  background-size: cover;
+  height: 200px;
+  -webkit-box-shadow: 0 4px 4px 2px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          box-shadow: 0 4px 4px 2px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.img-wrapper {
+  height: 200px;
+  position: relative;
+  float: left;
+}
+
+.img-wrapper a {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: none;
+}
+
+.img-wrapper:hover a {
+  display: block;
+}
+
+.desc-text {
+  color: grey;
+}
+
+.text-lead {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #404040;
+}
+
+.text-sub {
+  color: #595959;
+  font-weight: 300;
+  margin-top: -15px;
+}
+
+.text-sub-title {
+  color: #595959;
+  font-weight: 300;
+}
+
+.spacing {
+  border-left: 0.5px solid #b3b2b2;
 }
 
 #site-section {

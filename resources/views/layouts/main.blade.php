@@ -39,10 +39,12 @@
             <a class="nav-link" href="/search">Search</a>
           </li>
           <li class="nav-item dropdown name">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{$user->name}}</a>
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{Auth::user()->name}}</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="/account">My Profile</a>
+                <a class="dropdown-item" href="/account/{{Auth::user()->id}}">My Profile</a>
                 <a class="dropdown-item" href="/watchlist">Watchlist</a>
+                <a class="dropdown-item" href="#">Tenant Feedback</a>
+                <a class="dropdown-item" href="#">Expense Tracker</a>
                 <a class="dropdown-item" href="{{ route('logout') }}"
                       onclick="event.preventDefault();
                                document.getElementById('logout-form').submit();">

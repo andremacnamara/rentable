@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\user;
 use App\PropertyAdvert;
 use App\Watchlists;
 
@@ -70,6 +71,7 @@ class WatchlistController extends Controller
 
   public function destroy($id){
 
+    $user = Auth::user();
     $Watchlist = Watchlists::where('id', $id)->first();
 
     if($Watchlist->user_id == Auth::id()){
@@ -78,6 +80,11 @@ class WatchlistController extends Controller
     } else {
       return redirect('watchlist');
     }
-  }
 
+    if($user->WatchedProperties == $user){
+      return redirect('watchlist');
+    } else {
+      return redirect('watchlist');
+    }
+  }
 }

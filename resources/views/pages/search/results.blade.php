@@ -25,28 +25,33 @@
           </div>
           <div class="row">
             <div class="col-md-4">
-              <div style="position: relative; background: url('{{ $property->photo }}') no-repeat center center;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover; height: 200px;">
 
-                <!-- Encoding photo to add to url -->
+              <div class="img-wrapper">
+                <img class="result-image" src="{{$property->photo}}">
                 @php
                   $codedUrl = urlencode($property->photo);
                 @endphp
-                @if(count($filteredData) >= 1)
-                  <!-- Ensures users only have the "add" button if they currently have a wathclist created -->
-                  <a href="/watchlist/{{$property->id}}/add?image_url={{$codedUrl}}&address={{$property->address}}&town={{$property->town}}&county={{$property->county}}">
+                  @if(count($filteredData) >= 1)
+                    <a href="/watchlist/{{$property->id}}/add?image_url={{$codedUrl}}&address={{$property->address}}&town={{$property->town}}&county={{$property->county}}">
                     <div class="add-btn
-                      @if(in_array($property->id, $arrayInfo))
-                        active
-                      @endif">
-                      <i class="fa fa-check" aria-hidden="true"></i></div>
-                  </a>
-                @endif
+                    @if(in_array($property->id, $arrayInfo))
+                      active
+                    @endif">
+                      <i class="fa fa-check" aria-hidden="true"></i>
+                  </div>
+                </a>
+              @endif
               </div>
           	</div>
-          </div>
+
           <div class="col-md-8">
-            {{$property->description}}
+            {{-- <p>{{$property->description}}<p> --}}
+            <!-- Truncates the paragraph-->
+            <p>{{str_limit($property->description, $limit = 340, $end = '...')}}
+              <span class="text-muted"><a href="/property/{{$property->id}}">Read More</a></span>
+            </p>
           </div>
+      </div>
       </div>
     </div>
   @endforeach

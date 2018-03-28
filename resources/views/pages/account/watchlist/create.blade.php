@@ -21,23 +21,23 @@
               </div> <!-- ./ row-6 -->
               <div class="row">
                 <div class="col-md-6">
-                  <input type="text" name="title">
+                  <input class ="form-control" type="text" name="title" placeholder="Viewed properties...">
                 </div> <!-- ./ col-6-->
               </div> <!-- ./ row-5  -->
-              <div class="row">
+              <div class="row mt-2">
                 <div class="col-md-6">
                   <label for="title">Active</label>
                 </div> <!-- ./col=6 -->
               </div> <!-- ./ row-4-->
               <div class="row">
                 <div class="col-md-6">
-                  <select name="active">
+                  <select class="form-control" name="active">
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                   </select>
                 </div> <!-- ./ row 3-->
               </div> <!-- ./col-3 -->
-              <button type="submit">Create Watchlist</button>
+              <button class="mt-2 btn btn-primary" type="submit">Create Watchlist</button>
             </form> <!-- ./form -->
           </div> <!-- ./col-10 -->
         </div> <!-- ./ row 2 -->

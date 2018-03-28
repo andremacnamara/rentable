@@ -7,8 +7,11 @@
 <div class="container">
   <div class="row">
     <div class="col-md-10">
-      <h1>{{$Watchlists->title}}</h1>
-      <h6>This is where all your projects are located - <strong style="color: red">Author: {{$Watchlists->user->name}}</strong></h6>
+      <p class="lead font-weight-bold text-center">{{$Watchlists->title}} Watchlist</p>
+      <p class="text-center">
+        <a href="/watchlist/{{$Watchlists->id}}/edit" class="btn btn-info">Edit</a>
+        <a href="/watchlist/{{$Watchlists->id}}/delete" onclick="confirm()" class="btn btn-danger">Delete</a>
+      </p>
     </div>
   </div>
   <div class="row">
@@ -20,29 +23,23 @@
               <div class="row">
                 <!--
                   Getting all properties in a specific watchlists
-                  WatchlistController - Show.
+                  WatchlistController - Show
                 -->
-
-                
                 @foreach ($Watchlists->properties as $WatchedProperties)
                   <div class="col-md-4">
                     <div class="box">
                       <a href="/property/{{$WatchedProperties->id}}">
-                        <div style="position: relative; background: url('{{$WatchedProperties->image_url}}') no-repeat center center;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover; height: 200px;"></div>
+                        <img class="list-image" src="{{$WatchedProperties->image_url}}">
                       </a>
                     </div>
-                    <p>{{$WatchedProperties->address .', '. $WatchedProperties->town .', '. $WatchedProperties->county}}</p>
+                    <p class="lead mt-2">{{$WatchedProperties->address .', '. $WatchedProperties->town .', '. $WatchedProperties->county}}</p>
                   </div>
                 @endforeach
               </div>
             </div>
           </div>
-          <div class="col-md-2">
-            <center>
-              <a href="/watchlist/{{$Watchlists->id}}/edit" class="edit-btn">Edit</a>
-              <a href="/watchlist/{{$Watchlists->id}}/delete" onclick="confirm()" class="delete-btn">Delete</a>
-            </center>
-          </div>
+          <div class="col-md-3">
+
         </div>
       </div>
     </div>

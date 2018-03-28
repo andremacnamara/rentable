@@ -7,7 +7,10 @@
 <div class="container">
   <header class="jumbotron">
     <div class="container">
-      <h1>These are your saved lists</h1>
+      <p class="lead text-center font-weight-bold">All your watchlists</p>
+      <p>
+        <a href="/watchlist/create" class="btn btn-primary">Create List</a>
+      </p>
     </div>
   </header>
   <div class="row">
