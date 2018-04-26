@@ -26,7 +26,7 @@ class CreatePropertyAdvertsTable extends Migration
             $table->string('bathrooms');
             $table->string('furnished');
             $table->longText('description');
-            $table->integer('user_id');
+            $table->integer('user_id'); //Landlord ID
             $table->timestamps();
         });
     }
