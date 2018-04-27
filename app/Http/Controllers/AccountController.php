@@ -31,7 +31,7 @@ class AccountController extends Controller
 
   public function getAdd($id){
     $user = User::where('id', $id)->first();
-
+    $properties = PropertyAdvert::where('user_id', $id)->first();
     //If the user can be found
     if(!$user){
       return redirect('/')->with(['status', 'Profile Not Found']);
@@ -55,7 +55,7 @@ class AccountController extends Controller
 
     //After passing all checks. Add other account
     //Landord is adding the tenant
-    Auth::user()->addTenancy($user);
+    Auth::user()->addTenancy($user, $properties);
 
     return redirect('/account/{{$user->id}}')->with('status', "Request Sent");
   }
