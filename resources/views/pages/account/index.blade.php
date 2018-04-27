@@ -8,50 +8,7 @@
 
   @if($user->userType != "Landlord")
     <div class="row">
-      <div class="col-md-6">
-        <p class="text-lead">Your Landlords</p>
-        @if(!$user->tenancies()->count())
-          <p class="text-sub">You has no tenancies!</p>
-        @else
-          @foreach ($user->tenancies() as $users)
-            <p>
-              <span>{{$users->name}}</span>
-              <span class="text-muted">{{$users->userType}}</span>
-            </p>
-          @endforeach
-        @endif
-      </div>
-      <div class="col-md-6">
-        @if (Auth::user()->hasTenancyRequestsPending($user))
-          <p class="text-lead">Waiting for {{$user->name }} to accept your request.</p>
-          @elseif (Auth::user()->hasTenancyRequestsReceived($user))
-            <a href="/account/{{$user->id}}/accept" class="btn btn-primary">Accept Friend Request</a>
-          @elseif(Auth::user()->isInTenancyWith($user))
-            <p class="text-sub">You and {{$user->name}} are friends</p>
-          @elseif(Auth::user()==$user)
-            @else
-              {{-- <a href="/account/{{$user->id}}/add" class="btn btn-primary">Start Tenancy</a> --}}
-              <a href="/account/tenancy/create/{{$user->id}}" class="btn btn-primary">Start Tenancy</a>
-        @endif
-
-        <p class="text-lead">Requests from Landlords</p>
-        @if(!$tenancyRequests->count())
-          <p class="text-sub">You has no Tenancy Requests!</p>
-          @else
-            @foreach ($tenancyRequests as $Request)
-              <span>{{$Request->name}}</span>
-              <span class="text-muted">{{$Request->userType}}</span>
-              <span><a href="/account/{{$Request->id}}/accept" class="btn btn-primary btn-sm">Accept</a></span>
-            @endforeach
-        @endif
-
-        @if(session()->has('status'))
-          <div class="alert alert-info">
-            {{ session('status') }}
-          </div>
-        @endif
-
-      </div>
+    <a href="/account/tenancy/{{$user->id}}/create" class="btn btn-primary">Start Tenancy</a>
     </div>
     <div class="row mt-4">
       <div class="col-md-9">
@@ -91,50 +48,7 @@
       </div>
     </div>
   @else
-    <div class="row">
-      <div class="col-md-6">
-
-        <p class="text-lead">Your Tenants</p>
-        @if(!$user->tenancies()->count())
-          <p>You has no tenancies!</p>
-        @else
-          @foreach ($user->tenancies() as $users)
-            <p>
-              <span>{{$users->name}}</span>
-              <span class="text-muted">{{$users->userType}}</span>
-            </p>
-          @endforeach
-        @endif
-      </div>
-      <div class="col-md-6">
-        @if (Auth::user()->hasTenancyRequestsPending($user))
-          <p>Waiting for {{$user->name }} to accept your request.</p>
-        @elseif (Auth::user()->hasTenancyRequestsReceived($user))
-          <a href="#" class="btn btn-primary">Accept Friend Request</a>
-        @elseif(Auth::user()->isInTenancyWith($user))
-          <p>You and {{$user->name}} are friends</p>
-        @elseif(Auth::user()==$user)
-        @else
-          {{-- <a href="/account/{{$user->id}}/add" class="btn btn-primary">Start Tenancy</a> --}}
-          <a href="/account/tenancy/create" class="btn btn-primary">Start Tenancy</a>
-        @endif
-        <p class="text-lead">Requests from Tenants</p>
-        @if(!$tenancyRequests->count())
-          <p>You has no Tenancy Requests!</p>
-        @else
-          @foreach ($tenancyRequests as $Request)
-            <span>{{$Request->name}}</span>
-            <span class="text-muted">{{$Request->userType}}</span>
-          @endforeach
-
-        @endif
-      </div>
-      @if(session()->has('status'))
-        <div class="alert alert-info">
-          {{ session('status') }}
-        </div>
-      @endif
-    </div>
+   
     <header class="jumbotron">
       <div class="container">
         <h1>Welcome to EasyRental</h1>
