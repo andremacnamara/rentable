@@ -44,14 +44,14 @@ class User extends Authenticatable
 
     //Tennancies of this uers. User model, tenancy table.
     public function tenanciesOfMine(){
-      return $this->belongsToMany('App\User', 'tenancies', 'user_id', 'tenancy_id');
+      return $this->belongsToMany('App\User', 'tenancies', 'user_id', 'tenancy_id', 'property_address');
     }
 
     //Users who have this user as a friend
     //Inverse of user tenncies -> Both users have tenancy if one exists. One user can't be in a tenancy with someone who is not in tenacy with them.
     //Like friends on FB. You can't be friends with someone, without them being friends with you also.
     public function tenancyOf(){
-      return $this->belongsToMany('App\User', 'tenancies', 'tenancy_id', 'user_id');
+      return $this->belongsToMany('App\User', 'tenancies', 'tenancy_id', 'user_id', 'property_address');
     }
 
     //If a tenancy is accepted, create the tenancy ie friendship.
@@ -82,8 +82,8 @@ class User extends Authenticatable
     }
 
     //Add tenancy
-    public function addTenancy(User $user){
-      $this->tenancyOf()->attach($user->id);
+    public function addTenancy(User $user, $property){
+      $this->tenancyOf()->attach($user->id)->attach($property->id);
     }
 
     //Add tenancy
