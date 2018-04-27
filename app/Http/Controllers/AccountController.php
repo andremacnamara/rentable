@@ -21,10 +21,9 @@ class AccountController extends Controller
    $property = WatchedProperties::all();
    $Watchlists = Watchlists::where('user_id', Auth::id())->get();
    $users = Auth::user();
-  //  $tenancies = $users->tenancies();
-  //  $tenancyRequests = $users->tenacyRequests();
-
-  return view('/pages/account/index', compact('properties', 'user', 'Watchlists', 'property', 'Watchlists'));
+   $Tenancy =  DB::table('tenancy')->first();
+ 
+  return view('/pages/account/index', compact('properties', 'user', 'Watchlists', 'property', 'Watchlists', 'Tenancy'));
 }
 
   //Renders Form
@@ -46,12 +45,25 @@ class AccountController extends Controller
       'property_address' => $request->property_address,
     ]);
 
-    
-
-    dd($Tenancy);
+    //Redirct somewhere
+  }
+  
+  public function accept(Request $request){
+    Tenancy::where('accepted', 0)->where('request_sent', 1)
+            ->update(
+              [
+                'accepted' => 1,
+                'request_sent' => 0,
+              ]
+              
+            );
+    return back();
   }
 
-
+  public function reject(Request $request){
+    
+  }
+  
 
 
   public function show(){

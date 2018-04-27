@@ -20,7 +20,8 @@ class CreateTenancyTable extends Migration
             $table->integer('landlord_id');
             $table->string('landlord_name');
             $table->string('property_address');
-            $table->boolean('accepted')->default('0');;
+            $table->boolean('request_sent')->default('1');
+            $table->boolean('accepted')->default('0');
             $table->timestamps();
         });
     }
