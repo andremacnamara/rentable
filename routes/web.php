@@ -39,10 +39,12 @@ Route::get('/watchlist/{image_info}/add', 'WatchedPropertiesController@create')-
 
 //Accounts or Tenancies
 Route::get('/account/{id}', 'AccountController@index')->middleware('auth');
-Route::post('/account/{id}/add', 'AccountController@getAdd')->middleware('auth');
-Route::get('/account/{id}/accept', 'AccountController@getAccept')->middleware('auth');
+Route::get('/account/tenancy/{id}/create', 'AccountController@create')->middleware('auth');
+Route::post('/account/tenancy/{id}', 'AccountController@store')->middleware('auth');
+Route::post('/account/tenancy/{id}/accept', 'AccountController@accept')->middleware('auth');
+Route::post('/account/tenancy/{id}/reject', 'AccountController@reject')->middleware('auth');
 
-Route::get('account/tenancy/create/{id}', 'AccountController@tenancyIndex')->middleware('auth');
+
 //Route::get('select2-autocomplete', 'Select2AutocompleteController@layout');
 Route::get('/townsearch', 'AdvertisementController@townload');
 
