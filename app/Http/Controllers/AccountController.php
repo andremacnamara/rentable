@@ -49,7 +49,7 @@ class AccountController extends Controller
   }
   
   public function accept(Request $request){
-    Tenancy::where('accepted', 0)->where('request_sent', 1)
+    Tenancy::where('accepted', 0)->where('request_sent', 1)->where('tenant_id', Auth::id())
             ->update(
               [
                 'accepted' => 1,
@@ -61,9 +61,24 @@ class AccountController extends Controller
   }
 
   public function reject(Request $request){
-    
+    Tenancy::where('accepted', 0)->where('request_sent', 1)->where('tenant_id', Auth::id())
+            ->update(
+              [
+                'accepted' => 0,
+                'request_sent' => 0,
+              ]
+            );
+    return back();
   }
   
+  public function end(Request $request){
+    Tenancy::where('accepted', 1)->update(
+      [
+        'accepted' => 0,
+      ]
+    );
+    return back();
+  }
 
 
   public function show(){

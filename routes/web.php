@@ -43,7 +43,7 @@ Route::get('/account/tenancy/{id}/create', 'AccountController@create')->middlewa
 Route::post('/account/tenancy/{id}', 'AccountController@store')->middleware('auth');
 Route::post('/account/tenancy/{id}/accept', 'AccountController@accept')->middleware('auth');
 Route::post('/account/tenancy/{id}/reject', 'AccountController@reject')->middleware('auth');
-
+Route::post('/account/tenancy/{id}/end', 'AccountController@end')->middleware('auth');
 
 //Route::get('select2-autocomplete', 'Select2AutocompleteController@layout');
 Route::get('/townsearch', 'AdvertisementController@townload');
