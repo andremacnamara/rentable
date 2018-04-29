@@ -45,5 +45,4 @@ class User extends Authenticatable
     public function tenancy(){
       return $this->hasMany('App\Tenancy');
     }
-
 }
