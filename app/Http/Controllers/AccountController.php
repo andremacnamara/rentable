@@ -20,18 +20,21 @@ class AccountController extends Controller
    $properties = PropertyAdvert::where('user_id', $id)->get();
    $property = WatchedProperties::all();
    $Watchlists = Watchlists::where('user_id', Auth::id())->get();
-   $users = Auth::user();
-   $Tenancy =  DB::table('tenancy')->first();
- 
-  return view('/pages/account/index', compact('properties', 'user', 'Watchlists', 'property', 'Watchlists', 'Tenancy'));
+   
+   $tenancy = Tenancy::where('tenant_id', Auth::id())->first();
+  
+
+  
+  return view('/pages/account/index', compact('properties', 'user', 'Watchlists', 'property', 'Watchlists', 'tenancy'));
 }
 
   //Renders Form
   public function create($id){
     $user = User::where('id', $id)->first();
     $properties = PropertyAdvert::where('user_id', Auth::id())->get();
+    $tenancy = new Tenancy;
 
-    return view('/pages/account/tenancy/create', compact('user', 'properties'));
+    return view('/pages/account/tenancy/create', compact('user', 'properties', 'tenancy'));
   }
 
   //Stores data
@@ -45,10 +48,11 @@ class AccountController extends Controller
       'property_address' => $request->property_address,
     ]);
 
-    //Redirct somewhere
+    
+    return redirect("/account/$user->id");
   }
   
-  public function accept(Request $request){
+  public function accept(Request $request, User $user){
     Tenancy::where('accepted', 0)->where('request_sent', 1)->where('tenant_id', Auth::id())
             ->update(
               [
