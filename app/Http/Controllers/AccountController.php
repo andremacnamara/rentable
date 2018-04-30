@@ -13,20 +13,30 @@ use App\User;
 
 class AccountController extends Controller
 {
-  public function index($id){
-   //Authenticated different user types
-   //Sends Landlord and Tenant to appropiate pages
-   $user = User::where('id', $id)->first();
-   $properties = PropertyAdvert::where('user_id', $id)->get();
-   $property = WatchedProperties::all();
-   $Watchlists = Watchlists::where('user_id', Auth::id())->get();
-   
-   $tenancy = Tenancy::where('tenant_id', Auth::id())->first();
-  
 
+  public function index($id){
   
-  return view('/pages/account/index', compact('properties', 'user', 'Watchlists', 'property', 'Watchlists', 'tenancy'));
-}
+    $user = User::where('id', $id)->first();
+    $properties = PropertyAdvert::where('user_id', $id)->get();
+    $property = WatchedProperties::all();
+    $Watchlists = Watchlists::where('user_id', Auth::id())->get();
+
+    $landlordTenancies = Tenancy::all()->where('landlord_id', Auth::id());
+    $tenantTenancies = Tenancy::all()->where('tenant_id', Auth::id());
+
+   $tenancy = Tenancy::where('tenant_id', Auth::id())->first();
+   $Tenancy = Tenancy::where('landlord_id', Auth::id())->first();
+
+    //Sends different use types to relevant view
+
+    if($user->userType == "Landlord"){
+      return view('/pages/account/landlord', compact('properties', 'user', 'Watchlists', 'property', 'landlordTenancies', 'Tenancy'));
+    }
+    
+    else{
+      return view('/pages/account/tenant', compact('properties', 'user', 'Watchlists', 'property', 'tenantTenancies', 'tenancy'));
+    }
+  }
 
   //Renders Form
   public function create($id){
