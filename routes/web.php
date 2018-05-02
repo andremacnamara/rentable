@@ -45,6 +45,18 @@ Route::post('/account/tenancy/{id}/accept', 'AccountController@accept')->middlew
 Route::post('/account/tenancy/{id}/reject', 'AccountController@reject')->middleware('auth');
 Route::post('/account/tenancy/{id}/end', 'AccountController@end')->middleware('auth');
 
+Route::get('/user/search', 'AccountController@searchhome')->middleware('auth');
+Route::get('/user/search/results', 'AccountController@searchresults')->middleware('auth');
+
+//Routes for preference form
+Route::get('/account/preferance', 'TenantPreferanceController@index')->middleware('auth');
+Route::get('/account/preferance/create', 'TenantPreferanceController@create')->middleware('auth');
+Route::post('/account/preferance', 'TenantPreferanceController@store')->middleware('auth');
+Route::get('/account/preferance/{id}', 'TenantPreferanceController@show')->middleware('auth');
+Route::get('/account/preferance/{id}/edit', 'TenantPreferanceController@edit')->middleware('auth');
+Route::put('/account/preferance/{id}', 'TenantPreferanceController@update')->middleware('auth');
+Route::get('/account/preferance/{id}/delete', 'TenantPreferanceController@destroy')->middleware('auth');
+
 //Route::get('select2-autocomplete', 'Select2AutocompleteController@layout');
 Route::get('/townsearch', 'AdvertisementController@townload');
 

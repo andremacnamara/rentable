@@ -11,4 +11,8 @@ class PropertyAdvert extends Model
      public function user(){
       return $this->belongsTo('App\User');
     }
+
+    public function preferances(){
+      return $this->hasMany('App\TenantPreferance');
+    }
 }

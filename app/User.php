@@ -32,6 +32,10 @@ class User extends Authenticatable
       return $this->hasMany('App\PropertyAdvert');
     }
 
+    public function preferances(){
+        return $this->hasOne('App\TenantPreferance');
+      }
+
     //User has many lists
     public function watchlist(){
       return $this->hasMany('App\Watchlist');
@@ -45,4 +49,5 @@ class User extends Authenticatable
     public function tenancy(){
       return $this->hasMany('App\Tenancy');
     }
+
 }

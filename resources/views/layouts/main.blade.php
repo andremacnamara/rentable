@@ -38,6 +38,10 @@
           <li class="nav-item">
             <a class="nav-link" href="/search">Search</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/user/search">Search for tenant</a>
+          </li>
+          
           <li class="nav-item dropdown name">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{Auth::user()->name}}</a>
               <div class="dropdown-menu">

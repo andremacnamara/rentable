@@ -101,6 +101,10 @@ header {
   border-left: .5px solid hsl(0, 0%, 70%);
 }
 
+.shadow {
+  box-shadow: 3px 3px 3px 3px #888888;
+}
+
 #site-section {
   font-family: 'Roboto', sans-serif;
   padding-top: 56px;
@@ -160,7 +164,6 @@ header {
       }
     }
   }
-
 
   #auth {
     .box {

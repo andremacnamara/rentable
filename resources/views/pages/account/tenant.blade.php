@@ -7,16 +7,13 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            @foreach($tenantTenancies as $tenancy)
-            <span class="lead"><strong>Landlord Name: </strong>{{$tenancy->landlord_name}}</span><br>
-            <span class="lead"><strong>Property Address: </strong>{{$tenancy->property_address}}</span><br>
-            @endforeach
+            
             
                 {{-- This blocks a tenant adding themselves --}}
                 {{-- Shows add button, if tenancy model is empty. Also when no relationship established. --}}
             
             @if(Auth::user()->id != $user->id)
-                @if($tenancy == null || $tenancy->accepted == 0 && $tenancy->request_sent != 1)
+                @if($tenancy == null || $tenantTenancies->accepted == 0 && $tenantTenancies->request_sent === 0)
                     <a href="/account/tenancy/{{$user->id}}/create" class="btn btn-primary">Start Tenancy</a>
                 @endif
             @endif
@@ -24,6 +21,11 @@
                 {{-- Only shows following buttons, if the current signed in user, is the relevant user. --}}
                 {{-- Shows accept/reject if the request has been sent, but not accepted yet. --}}
 
+            @foreach($tenantTenancies as $tenancy)
+            <span class="text-muted">You have a request from</span><br>
+            <span class="text-muted"><strong>Landlord Name: </strong>{{$tenancy->landlord_name}}</span><br>
+            <span class="text-muted"><strong>Property Address: </strong>{{$tenancy->property_address}}</span><br>
+           
             @if(Auth::user()->id == $user->id)
                 @if($tenancy != null && $tenancy->accepted == 0 && $tenancy->request_sent == 1)
                     <form method="POST" action="/account/tenancy/{{$user->id}}/accept">
@@ -45,6 +47,7 @@
                     </form>
                 @endif
             @endif
+            @endforeach
         </div>
     </div>
 
@@ -73,7 +76,7 @@
                 Looping thorugh all watchlists.
                 Watchlist controller Index
               -->
-              <a href="#" class="link-sub-title">Property Preferences</a>
+              <a href="/account/preferance" class="link-sub-title">Property Preferences</a>
               <p class="text-sub-title">Your Watchlists</p>
               @foreach ($Watchlists as $Watchlist)
                 <tr>

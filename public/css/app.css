@@ -92,6 +92,11 @@ ul a:hover {
   border-left: 0.5px solid #b3b2b2;
 }
 
+.shadow {
+  -webkit-box-shadow: 3px 3px 3px 3px #888888;
+          box-shadow: 3px 3px 3px 3px #888888;
+}
+
 #site-section {
   font-family: 'Roboto', sans-serif;
   padding-top: 56px;
