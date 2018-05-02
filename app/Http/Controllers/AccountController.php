@@ -9,6 +9,7 @@ use DB;
 use Auth;
 use App\Watchlists;
 use App\WatchedProperties;
+use App\TenantPreferance;
 use App\User;
 
 class AccountController extends Controller
@@ -16,16 +17,18 @@ class AccountController extends Controller
 
   public function index($id){
   
-    $user = User::where('id', $id)->first();
+    $user = Auth::user();
     $properties = PropertyAdvert::where('user_id', $id)->get();
     $property = WatchedProperties::all();
     $Watchlists = Watchlists::where('user_id', Auth::id())->get();
 
+    //Allows landlords to see their relationship with tenants, and vice versa.
     $landlordTenancies = Tenancy::all()->where('landlord_id', Auth::id());
     $tenantTenancies = Tenancy::all()->where('tenant_id', Auth::id());
 
-   $tenancy = Tenancy::where('tenant_id', Auth::id())->first();
-   $Tenancy = Tenancy::where('landlord_id', Auth::id())->first();
+    //Allows the attirbutes from the table to be access by correct landlord and tenant
+    $tenancy = Tenancy::where('tenant_id', Auth::id())->first();
+    $Tenancy = Tenancy::where('landlord_id', Auth::id())->first();
 
     //Sends different use types to relevant view
 
@@ -94,6 +97,37 @@ class AccountController extends Controller
     return back();
   }
 
+  public function searchhome(){
+      //Search Filter UI
+      //Populates fields.
+      $user = Auth::user();
+      return view('pages/account/search/index', compact('user'));
+  }
+
+  public function searchresults(){
+    
+    //Gets all users that are tenants
+    $tenants = User::where('userType', 'tenant')->first();
+    
+    //Gets all preferances
+    $Prefereances = TenantPreferance::all()->first();
+    //Gets the prefereances that match a tenant id
+    $pref = $Prefereances::where('user_id', $tenants->id)->first();
+
+    //Gets the current signed in users property
+    $property = PropertyAdvert::where('user_id', Auth::user()->id)->first();
+
+    $result = $pref
+              ->where('county' , $property->county)
+              ->where('type' , $property->type)
+              ->where('rent', '<=', $property->rent)
+              ->where('bedrooms', '<=', $property->bedrooms)
+              ->where('bathrooms', '<=', $property->bathrooms);
+
+    $users = $result->get();
+    
+    return view('pages/account/search/results', compact('users'));
+  }
 
   public function show(){
 

@@ -65,7 +65,7 @@ class AdvertisementController extends Controller
       $user = User::where('id', $id)->first();
       $Advert = PropertyAdvert::where('id', $id)->first();
       return view('pages/advert/show', compact('Advert', 'user'));
-      //dd($Advert)
+      
     }
 
     public function edit($id){
