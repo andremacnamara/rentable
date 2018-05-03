@@ -14,6 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'  type='text/css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js" charset="utf-8"></script>
   </head>
   <body>
     <header>
@@ -48,7 +49,7 @@
                 <a class="dropdown-item" href="/account/{{Auth::user()->id}}">My Profile</a>
                 <a class="dropdown-item" href="/watchlist">Watchlist</a>
                 <a class="dropdown-item" href="#">Tenant Feedback</a>
-                <a class="dropdown-item" href="#">Expense Tracker</a>
+                <a class="dropdown-item" href="/expenses">Expense Tracker</a>
                 <a class="dropdown-item" href="{{ route('logout') }}"
                       onclick="event.preventDefault();
                                document.getElementById('logout-form').submit();">

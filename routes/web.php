@@ -57,6 +57,14 @@ Route::get('/account/preferance/{id}/edit', 'TenantPreferanceController@edit')->
 Route::put('/account/preferance/{id}', 'TenantPreferanceController@update')->middleware('auth');
 Route::get('/account/preferance/{id}/delete', 'TenantPreferanceController@destroy')->middleware('auth');
 
+
+//Expenses
+Route::get('/expenses', 'PropertyExpenseController@index')->middleware('auth');
+Route::get('/expenses/{id}/create', 'PropertyExpenseController@create')->middleware('auth');
+Route::post('/expenses', 'PropertyExpenseController@store')->middleware('auth');
+Route::get('/expenses/{id}', 'PropertyExpenseController@show')->middleware('auth');
+
+
 //Route::get('select2-autocomplete', 'Select2AutocompleteController@layout');
 Route::get('/townsearch', 'AdvertisementController@townload');
 
