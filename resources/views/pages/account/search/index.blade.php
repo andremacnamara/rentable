@@ -24,7 +24,17 @@
       {{ csrf_field() }}
       <div class="card-header">Search for a Tenant</div>
         <div class="card-body">
-
+          <center>
+            <div class="row">
+              <div class="col-md-10">
+                <select class="form-control" id="property_address" name="property_address">
+                  <!--Gets all counties from DB -->
+                    @foreach ($properties as $property)
+                      <option value="{{$property->id}}">{{$property->address . ', ' . $property->town . ', ' . $property->county}}</option>
+                    @endforeach
+                </select>
+              </div> <!-- ./ col-6-->
+            </div> <!-- ./ row-5  -->
          
             <div class="row mt-md-4">
                 <div class="col-md-4">
@@ -33,6 +43,7 @@
                     </button>
                 </div>
             </div>
+            </center>
           </div> <!-- ./Card Body -->
       </form>
     </div><!-- ./Card -->

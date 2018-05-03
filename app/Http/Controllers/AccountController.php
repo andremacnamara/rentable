@@ -44,7 +44,7 @@ class AccountController extends Controller
   //Renders Form
   public function create($id){
     $user = User::where('id', $id)->first();
-    $properties = PropertyAdvert::where('user_id', Auth::id())->get();
+    $properties = PropertyAdvert::all()->where('user_id', Auth::id());
     $tenancy = new Tenancy;
 
     return view('/pages/account/tenancy/create', compact('user', 'properties', 'tenancy'));
@@ -101,10 +101,11 @@ class AccountController extends Controller
       //Search Filter UI
       //Populates fields.
       $user = Auth::user();
-      return view('pages/account/search/index', compact('user'));
+      $properties = PropertyAdvert::where('user_id', Auth::id())->get();
+      return view('pages/account/search/index', compact('user', 'properties'));
   }
 
-  public function searchresults(){
+  public function searchresults(Request $request){
     
     //Gets all users that are tenants
     $tenants = User::where('userType', 'tenant')->first();
@@ -115,8 +116,12 @@ class AccountController extends Controller
     $pref = $Prefereances::where('user_id', $tenants->id)->first();
 
     //Gets the current signed in users property
-    $property = PropertyAdvert::where('user_id', Auth::user()->id)->first();
+    $selectedPropertyId = $request->property_address;
 
+    //Gets the id of landlord selected property in the search index view
+    $property = PropertyAdvert::where('id', $selectedPropertyId)->first();
+    
+    //Querys the preferances V selected property
     $result = $pref
               ->where('county' , $property->county)
               ->where('type' , $property->type)
