@@ -26,7 +26,6 @@
           @endforeach
         </tbody>
       </table>
-      {{$PropertyExpenses->sum('cost');}}
     </div>
   </div>
 @endsection

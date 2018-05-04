@@ -52,9 +52,9 @@
       <div class="row form-group justify-content-center">
         <div class="col-md-4">
           <select class="form-control" id="category" name="category">
-            <option>Mortgage Payment</option>
-            <option>Maintainence</option>
-            <option>Management Fee</option>
+            <option value="Mortgage Payment">Mortgage Payment</option>
+            <option value="Maintainence">Maintainence</option>
+            <option  value="Management Fee">Management Fee</option>
           </select>
         </div>
       </div>
