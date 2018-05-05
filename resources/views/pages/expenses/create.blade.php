@@ -7,7 +7,7 @@
   <div class=" text-center container">
     <div class="row">
       <div class="col-md-12">
-        <span class="h3">Log your expenses for this property</span><br>
+        <span class="h5">Log your expenses for this property</span><br>
         <span class="text-muted">{{$property->address}}</span>
         
       </div>
@@ -20,7 +20,7 @@
     </div>
     <form method="POST" action="/expenses">
       {{ csrf_field() }}
-      <input name="property_id" class="text-muted" value="{{$property->id}}">
+      <input name="property_id" type="hidden" class="text-muted" value="{{$property->id}}">
       <div class="row mt-4 justify-content-center">
         <div class="col-md-6">
           <label for"description">Expense Description<label>
@@ -52,9 +52,9 @@
       <div class="row form-group justify-content-center">
         <div class="col-md-4">
           <select class="form-control" id="category" name="category">
-            <option value="Mortgage Payment">Mortgage Payment</option>
-            <option value="Maintainence">Maintainence</option>
-            <option  value="Management Fee">Management Fee</option>
+            @foreach ($categories as $category)
+              <option>{{$category->name}}</option>
+            @endforeach
           </select>
         </div>
       </div>
