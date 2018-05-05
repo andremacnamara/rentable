@@ -50,4 +50,16 @@ class User extends Authenticatable
       return $this->hasMany('App\Tenancy');
     }
 
+    public function inTenancy(){
+        return $this->accepted == 1 && $this->request_sent == 0;
+    }
+
+    public function requestPending(){
+        return $this->accepted == 0 && $this->request_sent == 1;
+    }
+
+    public function isLandlord(){
+        return $this->userType == "Landlord";
+    }
+
 }
