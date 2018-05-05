@@ -17,7 +17,8 @@ class AccountController extends Controller
 
   public function index($id){
   
-    $user = Auth::user();
+    $currentUser = Auth::user();
+    $user = User::where('id', $id)->first();
     $properties = PropertyAdvert::where('user_id', $id)->get();
     $property = WatchedProperties::all();
     $Watchlists = Watchlists::where('user_id', Auth::id())->get();
@@ -29,16 +30,18 @@ class AccountController extends Controller
     //Allows the attirbutes from the table to be access by correct landlord and tenant
     $tenancy = Tenancy::where('tenant_id', Auth::id())->first();
     $Tenancy = Tenancy::where('landlord_id', Auth::id())->first();
-
+  
     //Sends different use types to relevant view
 
-    if($user->userType == "Landlord"){
-      return view('/pages/account/landlord', compact('properties', 'user', 'Watchlists', 'property', 'landlordTenancies', 'Tenancy'));
-    }
+    return view('/pages/account/profile/index', compact('properties', 'currentUser', 'user', 'Watchlists', 'property', 'tenantTenancies', 'landlordTenancies', 'Tenancy', 'tenancy'));
+
+    // if($user->userType == "Landlord"){
+    //   return view('/pages/account/landlord', compact('properties', 'user', 'Watchlists', 'property', 'landlordTenancies', 'Tenancy'));
+    // }
     
-    else{
-      return view('/pages/account/tenant', compact('properties', 'user', 'Watchlists', 'property', 'tenantTenancies', 'tenancy'));
-    }
+    // else{
+    //   return view('/pages/account/tenant', compact('properties', 'user', 'Watchlists', 'property', 'tenantTenancies', 'tenancy'));
+    // }
   }
 
   //Renders Form
@@ -65,7 +68,7 @@ class AccountController extends Controller
     return redirect("/account/$user->id");
   }
   
-  public function accept(Request $request, User $user){
+  public function accept(Request $request){
     Tenancy::where('accepted', 0)->where('request_sent', 1)->where('tenant_id', Auth::id())
             ->update(
               [
