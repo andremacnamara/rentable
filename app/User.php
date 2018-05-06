@@ -51,7 +51,7 @@ class User extends Authenticatable
     }
 
     public function inTenancy(){
-        return $this->accepted == 1 && $this->request_sent == 0;
+        return $this->accepted == 1 && $this->request_sent == 1;
     }
 
     public function requestPending(){

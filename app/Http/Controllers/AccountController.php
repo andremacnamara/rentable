@@ -30,7 +30,7 @@ class AccountController extends Controller
     //Allows the attirbutes from the table to be access by correct landlord and tenant
     $tenancy = Tenancy::where('tenant_id', Auth::id())->first();
     $Tenancy = Tenancy::where('landlord_id', Auth::id())->first();
-  
+    
     //Sends different use types to relevant view
 
     return view('/pages/account/profile/index', compact('properties', 'currentUser', 'user', 'Watchlists', 'property', 'tenantTenancies', 'landlordTenancies', 'Tenancy', 'tenancy'));
@@ -68,17 +68,29 @@ class AccountController extends Controller
     return redirect("/account/$user->id");
   }
   
-  public function accept(Request $request){
-    Tenancy::where('accepted', 0)->where('request_sent', 1)->where('tenant_id', Auth::id())
-            ->update(
-              [
-                'accepted' => 1,
-                'request_sent' => 0,
-              ]
+  // public function accept(Request $request, $id){
+  //   Tenancy::where('accepted', 0)->where('request_sent', 1)->where('tenant_id', Auth::id())->where('landlord_id', $id)
+  //           ->update(
+  //             [
+  //               'accepted' => 1,
+  //               'request_sent' => 0,
+  //             ]
               
-            );
-    return back();
+  //           );
+  //   return back();
+  // }
+
+  public function accept(Request $request, string $id)
+  {
+      Tenancy::find($id)
+          ->update([
+              'accepted' => 1,
+              'request_sent' => 0,
+          ]);
+  
+      return back();
   }
+
 
   public function reject(Request $request){
     Tenancy::where('accepted', 0)->where('request_sent', 1)->where('tenant_id', Auth::id())

@@ -62,7 +62,7 @@
                 and property details
             --}}
             
-          @elseif($tenancy != null && $tenancy->accepted == 1 && $tenancy->request_sent == 0)
+          @elseif($tenancy != null && $tenancy->accepted == 1)
             <form method="POST" action="/account/tenancy/{{$user->id}}/end">
               {{ csrf_field() }}
               <input type="submit" class="btn btn-primary" value="End Tenancy">
