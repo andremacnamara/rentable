@@ -34,14 +34,6 @@ class AccountController extends Controller
     //Sends different use types to relevant view
 
     return view('/pages/account/profile/index', compact('properties', 'currentUser', 'user', 'Watchlists', 'property', 'tenantTenancies', 'landlordTenancies', 'Tenancy', 'tenancy'));
-
-    // if($user->userType == "Landlord"){
-    //   return view('/pages/account/landlord', compact('properties', 'user', 'Watchlists', 'property', 'landlordTenancies', 'Tenancy'));
-    // }
-    
-    // else{
-    //   return view('/pages/account/tenant', compact('properties', 'user', 'Watchlists', 'property', 'tenantTenancies', 'tenancy'));
-    // }
   }
 
   //Renders Form
@@ -85,22 +77,22 @@ class AccountController extends Controller
       Tenancy::find($id)
           ->update([
               'accepted' => 1,
-              'request_sent' => 0,
+              'request_sent' => 0
           ]);
   
       return back();
   }
 
 
-  public function reject(Request $request){
-    Tenancy::where('accepted', 0)->where('request_sent', 1)->where('tenant_id', Auth::id())
-            ->update(
-              [
-                'accepted' => 0,
-                'request_sent' => 0,
-              ]
-            );
-    return back();
+  public function reject(Request $request, string $id)
+  {
+      Tenancy::find($id)
+          ->update([
+              'request_sent' => 0,
+              'accepted' => 0,
+          ]);
+  
+      return back();
   }
   
   public function end(Request $request){
