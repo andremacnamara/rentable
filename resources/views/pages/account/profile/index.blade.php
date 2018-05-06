@@ -19,11 +19,13 @@
                     Does not show button to tenant.
                 --}}
 
-                @if($currentUser->user == "Landlord")
-                    @if($Tenancy == null || $user->userType == "Tenant" && Auth::user()->id != $user->id && $Tenancy->accepted == 0 && $Tenancy->request_sent == 0)
+                @if($currentUser->userType == "Landlord")
+                    @if($Tenancy == null || $user->userType == "Tenant" && $currentUser->id != $user->id && $Tenancy->accepted == 0 && $Tenancy->request_sent == 0)
                         <a href="/account/tenancy/{{$user->id}}/create" class="btn btn-primary">Start Tenancy</a>
-                    @elseif($Tenancy->request_sent == 1 && $Tenancy->accepted == 0)
+                    @elseif($Tenancy->request_sent == 1 && $Tenancy->accepted == 0 && $user->userType == "Tenant" && $currentUser->id == $Tenancy->landlord_id && $user->id == $Tenancy->tenant_id)
                         <span>Request already sent</span>
+                    @elseif($Tenancy->accepted == 1 && $Tenancy->request_sent == 1 && $currentUser->id == $Tenancy->landlord_id && $user->id == $Tenancy->tenant_id)
+                        <span>You are in tenancy with this person</span>
                     @endif
                 @endif
                 
@@ -32,23 +34,28 @@
 
                 --}}
 
-                @if($tenancy == null ||$tenancy->accepted == 0 && $tenancy->request_sent == 1)
-                    <form method="POST" action="/account/tenancy/{{$user->id}}/accept">
-                        {{ csrf_field() }}
-                        <input type="submit" class="btn btn-primary" value="Accept Request">
-                    </form>
-                    <form method="POST" action="/account/tenancy/{{$user->id}}/reject">
-                        {{ csrf_field() }}
-                        <input type="submit" class="btn btn-warning" value="Reject Request">
-                    </form>
+                @if($currentUser->userType == "Tenant")
+                    @if($tenancy == null || $tenancy->accepted == 0 && $tenancy->request_sent == 1 && $tenancy->tenant_id == $currentUser->id)
+                        
+                        <form method="POST" action="/account/tenancy/{{$tenancy->id}}/accept">
+                            {{ csrf_field() }}
+                            <input type="submit" class="btn btn-primary" value="Accept Request">
+                        </form>
+                        <form method="POST" action="/account/tenancy/{{$user->id}}/reject">
+                            {{ csrf_field() }}
+                            <input type="submit" class="btn btn-warning" value="Reject Request">
+                        </form>
+                    @endif
+               
 
-                @elseif($tenancy->inTenancy())
+                    @if($tenancy->accepted == 1 && $tenancy->request_sent == 1 && $tenancy->tenant_id == $user->id ) 
                     <form method="POST" action="/account/tenancy/{{$user->id}}/end">
                         {{ csrf_field() }}
                         <input type="submit" class="btn btn-primary" value="End Tenancy">
                     </form>
                     <h5>Currently in Tenancy with {{$tenancy->landlord_name}}</h5>
                     <h5>Your property is {{$tenancy->property_address}}</h5>
+                    @endif
                 @endif
 
         
