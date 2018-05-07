@@ -57,7 +57,6 @@ Route::get('/account/preferance/{id}/edit', 'TenantPreferanceController@edit')->
 Route::put('/account/preferance/{id}', 'TenantPreferanceController@update')->middleware('auth');
 Route::get('/account/preferance/{id}/delete', 'TenantPreferanceController@destroy')->middleware('auth');
 
-
 //Expenses
 Route::get('/expenses', 'PropertyExpenseController@index')->middleware('auth');
 Route::get('/expenses/{id}/create', 'PropertyExpenseController@create')->middleware('auth');

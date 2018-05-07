@@ -49,7 +49,7 @@
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="/account/{{Auth::user()->id}}">My Profile</a>
                 <a class="dropdown-item" href="/watchlist">Watchlist</a>
-                <a class="dropdown-item" href="#">Tenant Feedback</a>
+                <a class="dropdown-item" href="/feedback">Tenant Feedback</a>
                 <a class="dropdown-item" href="/expenses">Expense Tracker</a>
                 <a class="dropdown-item" href="{{ route('logout') }}"
                       onclick="event.preventDefault();
