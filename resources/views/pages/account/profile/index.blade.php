@@ -134,7 +134,7 @@
                                 <td>
                                     {{$Tenant->property_address}}
                                 </td>
-                            </tr
+                            </tr>
                         @endforeach
                         
                 </table>
