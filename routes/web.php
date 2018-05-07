@@ -68,6 +68,7 @@ Route::get('/chart', 'PropertyExpenseController@chart');
 Route::get('/feedback', 'FeedbackController@index')->middleware('auth');
 Route::get('/feedback/create', 'FeedbackController@create')->middleware('auth');
 Route::post('/feedback', 'FeedbackController@store')->middleware('auth');
+Route::get('/feedback/{id}', 'FeedbackController@show')->middleware('auth');
 
 
 
