@@ -11,16 +11,16 @@ use App\User;
 class FeedbackController extends Controller
 {
     public function index(){
-    
-    return view('pages/feedback/index');
+        $feedback = Feedback::where('tenant_id', Auth::user()->id)->orWhere('landlord_id', Auth::user()->id)->get();
+        return view('pages/feedback/index', compact('feedback'));
     }
 
     public function create(){
-    $tenancy = Tenancy::where('tenant_id', Auth::user()->id)->get();
-    $options = DB::table('feedback_options')->get();
-    $options2 = DB::table('feedback_options2')->get();
+        $tenancy = Tenancy::where('tenant_id', Auth::user()->id)->get();
+        $options = DB::table('feedback_options')->get();
+        $options2 = DB::table('feedback_options2')->get();
 
-    return view('pages/feedback/create', compact('tenancy','options','options2'));
+        return view('pages/feedback/create', compact('tenancy','options','options2'));
     }
 
     public function store(Request $request){
@@ -42,7 +42,8 @@ class FeedbackController extends Controller
         return redirect("/");
     }
 
-    public function show(){
-    
+    public function show($id){
+        $feedback = Feedback::where('id', $id)->first();
+        return view('/pages/feedback/show', compact('feedback'));
     }
 }
