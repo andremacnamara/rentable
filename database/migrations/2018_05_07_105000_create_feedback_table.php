@@ -20,13 +20,13 @@ class CreateFeedbackTable extends Migration
             $table->string('tenant_name');
             $table->integer('tenant_id');
             $table->string('property_address');
-            $table->string('overallRating');
-            $table->string('landlordCommunicationRating');
-            $table->string('issueResolvedSpeedRating');
-            $table->string('rentMarketRate');
-            $table->string('happyToContinueTenancy');
-            $table->string('otherComments');
-            $table->string('recommendLandlord');
+            $table->string('overall_rating');
+            $table->string('landlord_communication_rating');
+            $table->string('issue_resolved_speed_rating');
+            $table->string('rent_market_rate');
+            $table->string('happy_to_continue_tenancy');
+            $table->string('other_comments');
+            $table->string('recommend_landlord');
             $table->timestamps();
         });
     }

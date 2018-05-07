@@ -23,12 +23,12 @@ class PropertyExpenseController extends Controller
     return view('/pages/expenses/index', compact('properties', 'data'));
   }
 
-  public function chart(){
-    $chart = new OverallExpenseChart;
-      // Add the dataset (we will go with the chart template approach)
-      $chart->dataset("Sample", "line", [100, 65, 84, 45, 90]);
-      return view('/pages/expenses/charts', ['chart' => $chart]);
-  }
+  // public function chart(){
+  //     $chart = new OverallExpenseChart;
+  //     // Add the dataset (we will go with the chart template approach)
+  //     $chart->dataset("OverallExpense", "line", [100, 65, 84, 45, 90]);
+  //     return view('/pages/expenses/charts', ['chart' => $chart]);
+  // }
   
   public function create($id){
     $property = PropertyAdvert::where('id', $id)->first();
