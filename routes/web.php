@@ -64,6 +64,14 @@ Route::post('/expenses', 'PropertyExpenseController@store')->middleware('auth');
 Route::get('/expenses/property/{id}', 'PropertyExpenseController@show')->middleware('auth');
 Route::get('/chart', 'PropertyExpenseController@chart');
 
+//Feedback
+Route::get('/feedback', 'FeedbackController@index')->middleware('auth');
+Route::get('/feedback/create', 'FeedbackController@create')->middleware('auth');
+Route::post('/feedback', 'FeedbackController@store')->middleware('auth');
+
+
+
+
 //Route::get('select2-autocomplete', 'Select2AutocompleteController@layout');
 Route::get('/townsearch', 'AdvertisementController@townload');
 

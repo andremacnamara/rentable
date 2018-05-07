@@ -2,12 +2,47 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Auth;
+use DB;
+use App\Feedback;
+use App\Tenancy;
 use App\User;
 
 class FeedbackController extends Controller
 {
     public function index(){
+    
+    return view('pages/feedback/index');
+    }
 
-        return view('');
+    public function create(){
+    $tenancy = Tenancy::where('tenant_id', Auth::user()->id)->get();
+    $options = DB::table('feedback_options')->get();
+    $options2 = DB::table('feedback_options2')->get();
+
+    return view('pages/feedback/create', compact('tenancy','options','options2'));
+    }
+
+    public function store(Request $request){
+        $feedback = Feedback::create([
+            "landlord_name" => $request->landlord_name,
+            "landlord_id"   => $request->landlord_id,
+            "tenant_name"   => $request->tenant_name,
+            "tenant_id"     => $request->tenant_id,
+            "property_address" => $request->property_address,
+            "overall_rating" => $request->overall_tenancy,
+            "landlord_communication_rating" => $request->landlord_communication,
+            "issue_resolved_speed_rating" => $request->maintainence_response,
+            "rent_market_rate" => $request->rent_reflect,
+            "happy_to_continue_tenancy" => $request->happy_continue,
+            "other_comments" => $request->comment,
+            "recommend_landlord" => $request->refer
+        ]);
+
+        return redirect("/");
+    }
+
+    public function show(){
+    
     }
 }
