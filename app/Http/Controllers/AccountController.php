@@ -125,9 +125,10 @@ class AccountController extends Controller
     //Gets the current signed in users property
     $selectedPropertyId = $request->property_address;
 
+    //Gets the id of landlord selected property in the search index view
     $property = PropertyAdvert::where('id', $selectedPropertyId)->first();
     
-
+    //Querys the preferances V selected property
     $result = $pref
               ->where('county' , $property->county)
               ->where('type' , $property->type)

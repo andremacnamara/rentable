@@ -15,4 +15,9 @@ class PropertyAdvert extends Model
     public function preferances(){
       return $this->hasMany('App\TenantPreferance');
     }
+
+    public function expenses(){
+      return $this->hasMany('App\PropertyExpense');
+    }
 }
+
