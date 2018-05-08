@@ -49,7 +49,7 @@ Route::get('/user/search', 'AccountController@searchhome')->middleware('auth');
 Route::get('/user/search/results', 'AccountController@searchresults')->middleware('auth');
 
 //Routes for preference form
-Route::get('/account/preferance', 'TenantPreferanceController@index')->middleware('auth');
+Route::get('/preferance', 'TenantPreferanceController@index')->middleware('auth');
 Route::get('/account/preferance/create', 'TenantPreferanceController@create')->middleware('auth');
 Route::post('/account/preferance', 'TenantPreferanceController@store')->middleware('auth');
 Route::get('/account/preferance/{id}', 'TenantPreferanceController@show')->middleware('auth');
@@ -68,7 +68,7 @@ Route::get('/chart', 'PropertyExpenseController@chart');
 Route::get('/feedback', 'FeedbackController@index')->middleware('auth');
 Route::get('/feedback/create', 'FeedbackController@create')->middleware('auth');
 Route::post('/feedback', 'FeedbackController@store')->middleware('auth');
-Route::get('/feedback/{id}', 'FeedbackController@show')->middleware('auth');
+Route::get('/feedback/results/{id}', 'FeedbackController@show')->middleware('auth');
 
 
 

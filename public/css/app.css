@@ -97,6 +97,18 @@ ul a:hover {
           box-shadow: 3px 3px 3px 3px #888888;
 }
 
+.content {
+  font-size: 1.35rem;
+  font-weight: 300;
+  color: #8c8c8c;
+}
+
+.border-shadow {
+  -webkit-box-shadow: 2px 4px 3px 2px #88889F;
+          box-shadow: 2px 4px 3px 2px #88889F;
+  margin-bottom: 50px;
+}
+
 #site-section {
   font-family: 'Roboto', sans-serif;
   padding-top: 56px;

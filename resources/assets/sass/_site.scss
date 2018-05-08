@@ -105,6 +105,17 @@ header {
   box-shadow: 3px 3px 3px 3px #888888;
 }
 
+.content {
+	font-size: 1.35rem;
+  font-weight: 300;
+  color: hsl(0, 0%, 55%);
+}
+
+.border-shadow {
+  box-shadow: 2px 4px 3px 2px #88889F;
+	margin-bottom: 50px;
+}
+
 #site-section {
   font-family: 'Roboto', sans-serif;
   padding-top: 56px;

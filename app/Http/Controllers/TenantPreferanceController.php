@@ -11,7 +11,8 @@ use DB;
 class TenantPreferanceController extends Controller {
     
     public function index(){
-        return view('pages/account/tenancy/preferences/index');
+        $user = Auth::user();
+        return view('pages/account/tenancy/preferences/index', compact('user'));
     }
 
     public function create(){

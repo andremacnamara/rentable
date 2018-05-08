@@ -32,7 +32,7 @@
 
           @foreach ($feedback as $tenancyfeedback)
             <tr>
-              <td><a href="/feedback/{{$tenancyfeedback->id}}">Feedback ID {{$tenancyfeedback->id}}</td>
+              <td><a href="/feedback/results/{{$tenancyfeedback->id}}">Feedback ID {{$tenancyfeedback->id}}</td>
               <td>{{$tenancyfeedback->created_at}}</td>
               <td>{{$tenancyfeedback->landlord_name}}</td>
               <td>{{$tenancyfeedback->tenant_name}}</td>
