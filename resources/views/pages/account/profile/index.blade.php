@@ -84,7 +84,7 @@
             </div>
             <div class="col-md-3 spacing">
                 <table class="table">
-                    <a href="#" class="link-sub-title">Property Preferences</a>
+                    <a href="/preferance" class="link-sub-title">Property Preferences</a>
                     <p class="text-sub-title">Your Watchlists</p>
                         @foreach ($Watchlists as $Watchlist)
                             <tr>
