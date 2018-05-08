@@ -70,6 +70,11 @@ Route::get('/feedback/create', 'FeedbackController@create')->middleware('auth');
 Route::post('/feedback', 'FeedbackController@store')->middleware('auth');
 Route::get('/feedback/results/{id}', 'FeedbackController@show')->middleware('auth');
 
+//Messages
+Route::get('/messages', 'MessageController@index')->middleware('auth');
+Route::get('/messages/{id}/create', 'MessageController@create')->middleware('auth');
+Route::post('/messages', 'MessageController@store')->middleware('auth');
+Route::get('/messages/{id}', 'MessageController@show')->middleware('auth');
 
 
 
