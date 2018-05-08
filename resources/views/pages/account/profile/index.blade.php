@@ -141,5 +141,6 @@
             </div>
             </div>
         @endif
+        <a href="/messages/{{$user->id}}/create" class="btn btn-primary">Send Message</a>
     </div>
 @endsection
