@@ -9,11 +9,24 @@ use App\User;
 
 class MessageController extends Controller
 {
-    public function index(){
-        
-        $messages = Message::where('sender_id', Auth::user()->id)->orWhere('recipient_id', Auth::user()->id)->get();
 
-        return view('/pages/message/index', compact('messages'));
+    public function index(){
+
+        $user = User::where('id',  Auth::user()->id)->first();
+        return view('/pages/message/index', compact('user'));    
+    }
+
+    public function inbox(){
+        
+        $recievedMessages = Message::where('recipient_id', Auth::user()->id)->get();
+        return view('/pages/message/inbox', compact('recievedMessages'));
+    }
+
+    public function sentbox(){
+
+        $sentMessages = Message::where('sender_id', Auth::user()->id)->get();
+        // dd($sentMessages);
+        return view('/pages/message/sentbox', compact('sentMessages'));
     }
 
     public function create($id){
