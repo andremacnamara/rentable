@@ -71,11 +71,12 @@ Route::post('/feedback', 'FeedbackController@store')->middleware('auth');
 Route::get('/feedback/results/{id}', 'FeedbackController@show')->middleware('auth');
 
 //Messages
-Route::get('/messages', 'MessageController@index')->middleware('auth');
+Route::get('/messages/index', 'MessageController@index')->middleware('auth');
 Route::get('/messages/{id}/create', 'MessageController@create')->middleware('auth');
 Route::post('/messages', 'MessageController@store')->middleware('auth');
-Route::get('/messages/{id}', 'MessageController@show')->middleware('auth');
-
+Route::get('/messages/show/{id}', 'MessageController@show')->middleware('auth');
+Route::get('/messages/inbox', 'MessageController@inbox')->middleware('auth');
+Route::get('/messages/sentbox', 'MessageController@sentbox')->middleware('auth');
 
 
 //Route::get('select2-autocomplete', 'Select2AutocompleteController@layout');
