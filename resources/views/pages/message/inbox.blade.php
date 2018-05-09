@@ -27,6 +27,7 @@
                             <th>Title</th>
                             <th>From</th>
                             <th>Date</th>
+                            <th>Time</th>
                             <th>Read</th>
                         </tr>
                     </thead>
@@ -38,7 +39,8 @@
                                 <tr>
                                     <td><a href="/messages/show/{{$message->id}}">{{$message->title}}</a></td>
                                     <td>{{$message->sender_name}}</td>
-                                    <td>{{$message->created_at}}</td>
+                                    <td>{{$message->created_at->toDateString()}}</td>
+                                    <td>{{$message->created_at->toTimeString()}}</td>
                                     <td>{{$message->read}}</td>
                                 </tr>
                             @endforeach
