@@ -83,6 +83,11 @@ Route::get('/expenseclaim/home', 'ExpenseClaimerController@index')->middleware('
 Route::get('/expenseclaim/create', 'ExpenseClaimerController@create')->middleware('auth');
 Route::post('/expenseclaim', 'ExpenseClaimerController@store')->middleware('auth');
 Route::get('/expenseclaim/show/{id}', 'ExpenseClaimerController@show')->middleware('auth');
+Route::get('/expenseclaim/{id}/edit', 'ExpenseClaimerController@edit')->middleware('auth');
+Route::put('/expenseclaim/{id}', 'ExpenseClaimerController@update')->middleware('auth');
+//Changing status
+Route::get('/expenseclaim/{id}/approve', 'ExpenseClaimerController@approve')->middleware('auth');
+Route::put('/expenseclaim/show/{id}', 'ExpenseClaimerController@changeStatus')->middleware('auth');
 
 
 //Route::get('select2-autocomplete', 'Select2AutocompleteController@layout');

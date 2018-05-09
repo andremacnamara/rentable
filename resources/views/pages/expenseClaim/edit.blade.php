@@ -16,30 +16,23 @@
         <span class="h5 text-muted">Please fill out this form</span>
       </div>
     </div>
-    <form method="POST" action="/expenseclaim">
+    <form method="POST" action="/expenseclaim/{{$expenseClaim->id}}">
 
       {{ csrf_field() }}
+      {{ method_field('PUT') }}
 
       <div class="row mt-4 justify-content-center">
         <div class="col-md-6">
           <label for="property_address">Property Address</label>
         </div>
       </div>
-      @if(!empty($recievedMessages))
-        @foreach($tenancy as $tenant)
-          <input type="hidden" class="btn btn-primary mb-2" name="landlord_id" value="{{$tenant->landlord_id}}">
-          <input type="hidden" class="btn btn-primary mb-2" name="tenant_id" value="{{$tenant->tenant_id}}">
-        @endforeach
-      @endif
-      <div class="row form-group justify-content-center">
-        <div class="col-md-4">
-          <select class="form-control" id="property_address" name="property_address">
-              @foreach ($tenancy as $property)
-                  <option>{{$property->property_address}}</option>
-              @endforeach
-          </select>
-        </div>
-      </div>
+        @if(!empty($expenseClaim))
+          <div class="row form-group justify-content-center">
+            <div class="col-md-4">
+              <input type="text" class="form-control" name="property_address" value="{{$expenseClaim->property_address}}" readonly>
+            </div>
+          </div>
+        @endif
 
       <div class="row mt-4 justify-content-center">
         <div class="col-md-6">
@@ -48,7 +41,7 @@
       </div>
       <div class="row form-group justify-content-center">
         <div class="col-md-4">
-          <input class="form-control" type="text" name="title">
+          <input class="form-control" type="text" name="title" value="{{$expenseClaim->title}}">
         </div>
       </div>
 
@@ -59,7 +52,7 @@
       </div>
       <div class="row form-group justify-content-center">
         <div class="col-md-4">
-          <input class="form-control" type="text" name="description">
+          <input class="form-control" type="text" name="description" value="{{$expenseClaim->description}}">
         </div>
       </div>
 
@@ -71,7 +64,7 @@
       <div class="row form-group justify-content-center">
         <div class="col-md-4 input-group">
           <span class="input-group-addon mr-1 mt-1">€</span>
-          <input class="form-control" type="text" name="cost">
+          <input class="form-control" type="text" name="cost" value="{{$expenseClaim->cost}}">
         </div>
       </div>
 
@@ -83,7 +76,7 @@
       </div>
       <div class="row form-group justify-content-center">
         <div class="col-md-4">
-          <input class="form-control" type="text" name="receipt">
+          <input class="form-control" type="text" name="receipt" value="{{$expenseClaim->receipt}}">
         </div>
       </div>
      
