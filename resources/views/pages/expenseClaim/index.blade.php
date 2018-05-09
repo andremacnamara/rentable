@@ -23,20 +23,28 @@
             <tr>
               <th>Title</th>
               <th>Date Posted</th>
-              <th>Approved</th>
+              <th>Claim Approved</th>
+              @if(!empty($expenseClaim))
+                @if($expenseClaim != "Awaiting Review")
+                <th>Time Reviewed</th>
+                @endif
+              @endif
             </tr>
           </thead>
           <tbody>
 
-            {{--@foreach ($feedback as $tenancyfeedback)
+           @if(!empty($expenseClaim))
+            @foreach ($expenseClaim as $claim)
               <tr>
-                <td><a href="/feedback/results/{{$tenancyfeedback->id}}">Feedback ID {{$tenancyfeedback->id}}</td>
-                <td>{{$tenancyfeedback->created_at}}</td>
-                <td>{{$tenancyfeedback->landlord_name}}</td>
-                <td>{{$tenancyfeedback->tenant_name}}</td>
-                <td>{{$tenancyfeedback->property_address}}</td>
+                <td><a href="/expenseclaim/show/{{$claim->id}}">{{$claim->title}}</a></td>
+                <td>{{$claim->created_at->toDateString()}}</td>
+                <td>{{$claim->approved}}</td>
+                @if($claim->approved != "Awaiting Review")
+                  <th>{{$claim->updated_at}}</th>
+                @endif
               </tr>
-            @endforeach --}}
+            @endforeach
+          @endif
           </tbody>
         </table>
       </div>

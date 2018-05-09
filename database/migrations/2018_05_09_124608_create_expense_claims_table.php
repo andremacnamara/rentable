@@ -21,7 +21,8 @@ class CreateExpenseClaimsTable extends Migration
             $table->string('receipt');
             $table->string('tenant_id');
             $table->string('landlord_id');
-            $table->boolean('approved')->default('0');
+            $table->string('property_address');
+            $table->string('approved')->default('Awaiting Review');
             $table->timestamps();
         });
     }
