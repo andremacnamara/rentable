@@ -78,6 +78,12 @@ Route::get('/messages/show/{id}', 'MessageController@show')->middleware('auth');
 Route::get('/messages/inbox', 'MessageController@inbox')->middleware('auth');
 Route::get('/messages/sentbox', 'MessageController@sentbox')->middleware('auth');
 
+//ExpenseClaimer
+Route::get('/expenseclaim/home', 'ExpenseClaimerController@index')->middleware('auth');
+Route::get('/expenseclaim/create', 'ExpenseClaimerController@create')->middleware('auth');
+Route::post('/expenseclaim', 'ExpenseClaimerController@store')->middleware('auth');
+Route::get('/expenseclaim/show/{id}', 'ExpenseClaimerController@show')->middleware('auth');
+
 
 //Route::get('select2-autocomplete', 'Select2AutocompleteController@layout');
 Route::get('/townsearch', 'AdvertisementController@townload');
