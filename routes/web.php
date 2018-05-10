@@ -90,6 +90,11 @@ Route::get('/expenseclaim/{id}/approve', 'ExpenseClaimerController@approve')->mi
 Route::put('/expenseclaim/show/{id}', 'ExpenseClaimerController@changeStatus')->middleware('auth');
 
 
+//Charts
+Route::get('/aggregatedpropertyoverview', 'ChartsController@AggregatedPropertyOverview');
+Route::get('/uniquepropertyoverview/{id}', 'ChartsController@uniquePropertyOverview');
+
+
 //Route::get('select2-autocomplete', 'Select2AutocompleteController@layout');
 Route::get('/townsearch', 'AdvertisementController@townload');
 

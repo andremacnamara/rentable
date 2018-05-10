@@ -7,8 +7,6 @@
 
 @section('content')
 
-
-
-
+</div>
 
 @endsection
