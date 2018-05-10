@@ -4,6 +4,19 @@
 @endsection
 
 @section('content')
+@if ($errors->any())
+    <div class="row mx-auto text-center">
+      <div class="col-md-12">
+        <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+        </div>
+      </div>
+    </div>
+@endif
     <div class="container">
         <h3>Specifiy your property preferences</h3>
         <span>This will be used for the following......</span><br>

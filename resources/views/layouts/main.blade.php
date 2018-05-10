@@ -58,6 +58,9 @@
                 <a class="dropdown-item" href="/feedback">Tenant Feedback</a>
                 <a class="dropdown-item" href="/expenses">Expense Tracker</a>
                 <a class="dropdown-item" href="/messages/index">Message Center</a>
+                <a class="dropdown-item" href="/expenseclaim/home">Claim a Expense Back</a>
+                <a class="dropdown-item" href="/preferance">Set Preferences</a>
+                
                 <a class="dropdown-item" href="{{ route('logout') }}"
                       onclick="event.preventDefault();
                                document.getElementById('logout-form').submit();">

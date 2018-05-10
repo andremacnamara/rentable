@@ -26,6 +26,15 @@ class TenantPreferanceController extends Controller {
     }
 
     public function store(Request $request){
+
+        $this->validate($request, [
+            "county" => "required",
+            "type" => "required",
+            "rent" => "required",
+            "bedrooms" => "required",
+            "bathrooms" => "required",
+          ]);
+
         $TenantPreferance = TenantPreferance::create([
             "county"      => $request->county,
             "type"        => $request->type,
@@ -60,6 +69,15 @@ class TenantPreferanceController extends Controller {
     }
 
     public function update(Request $request, $id){
+
+        $this->validate($request, [
+            "county" => "required",
+            "type" => "required",
+            "rent" => "required",
+            "bedrooms" => "required",
+            "bathrooms" => "required",
+          ]);
+          
         $TenantPreferance = TenantPreferance::where('id', $id)->where('user_id', Auth::id())->update([
             "county"      => $request->county,
             "type"        => $request->type,

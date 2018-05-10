@@ -28,6 +28,7 @@ class AdvertisementController extends Controller
       $types  = DB::table('property_type')->get();
       $specs  = DB::table('property_specs')->get();
       $user = Auth::user();
+      
 
       //Only allows landlords to post
       if($user->userType != "Landlord"){
@@ -39,6 +40,21 @@ class AdvertisementController extends Controller
     }
 
     public function store(Request $request){
+
+      $this->validate($request, [
+        "photo" => "required|url",
+        "address" => "required",
+        "county" => "required",
+        "town" => "required",
+        "type" => "required",
+        "rent" => "required",
+        "date" => "required|date",
+        "bedrooms" => "required",
+        "bathrooms" => "required",
+        "furnished" => "required",
+        "description" => "required",
+      ]);
+      
       //Stores data from form
       $Advert = PropertyAdvert::create([
           "photo"       => $request->photo,
@@ -54,6 +70,8 @@ class AdvertisementController extends Controller
           "description" => $request->description,
           "user_id" => Auth::id(),
       ]);
+
+
       //Gets the advertid for redirect to show page
       $id = $Advert->id;
 
@@ -85,6 +103,21 @@ class AdvertisementController extends Controller
     public function update(Request $request, $id){
       //Similar to Stores
       //Posts updated data
+
+      $this->validate($request, [
+        "photo" => "required|url",
+        "address" => "required",
+        "county" => "required",
+        "town" => "required",
+        "type" => "required",
+        "rent" => "required",
+        "date" => "required|date",
+        "bedrooms" => "required",
+        "bathrooms" => "required",
+        "furnished" => "required",
+        "description" => "required",
+      ]);
+      
       PropertyAdvert::where('id', $id)->where('user_id', Auth::id())->update([
           "photo"       => $request->photo,
           "address"     => $request->address,

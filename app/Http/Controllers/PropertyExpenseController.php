@@ -22,13 +22,6 @@ class PropertyExpenseController extends Controller
     $properties = PropertyAdvert::where('user_id', Auth::user()->id)->get();
     return view('/pages/expenses/index', compact('properties', 'data'));
   }
-
-  // public function chart(){
-  //     $chart = new OverallExpenseChart;
-  //     // Add the dataset (we will go with the chart template approach)
-  //     $chart->dataset("OverallExpense", "line", [100, 65, 84, 45, 90]);
-  //     return view('/pages/expenses/charts', ['chart' => $chart]);
-  // }
   
   public function create($id){
     $property = PropertyAdvert::where('id', $id)->first();
@@ -38,6 +31,14 @@ class PropertyExpenseController extends Controller
   }
 
   public function store(Request $request){
+
+    $this->validate($request, [
+      "description" => "required",
+      "amount" => "required",
+      "date" => "required",
+      "category" => "required"
+    ]);
+
     $PropertyExpenses = PropertyExpense::create([
       "property_id"         => $request->property_id,
       "user_id"             => Auth::user()->id,
@@ -47,7 +48,9 @@ class PropertyExpenseController extends Controller
       "category"            => $request->category
     ]);  
     
-    return "Expense Log";
+    $id = $PropertyExpenses->property_id;
+
+    return redirect("/expenses/property/$id");
   }
 
   public function show($id){

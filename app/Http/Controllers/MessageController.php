@@ -36,6 +36,12 @@ class MessageController extends Controller
     }
 
     public function store(Request $request){
+        $this->validate($request, [
+            "recipient_name" => "required",
+            "title" => "required",
+            "message" => "required",
+          ]);
+
         $message = Message::create([
             "sender_id" => Auth::id(),
             "sender_name" => Auth::user()->name,
@@ -44,7 +50,7 @@ class MessageController extends Controller
             "title" => $request->title,
             "message" => $request->message
         ]);
-        return "Message sent";
+        return redirect("/messages/sentbox");
     }
 
     public function show($id){ 

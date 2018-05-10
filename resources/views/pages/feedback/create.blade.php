@@ -4,6 +4,19 @@
 @endsection
 
 @section('content')
+    @if ($errors->any())
+        <div class="row mx-auto text-center">
+        <div class="col-md-12">
+            <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            </div>
+        </div>
+        </div>
+    @endif
     <div class="container">
         <div class="row text-center">
             <div class="col-md-12">
@@ -36,7 +49,7 @@
                                 </div>
                             </div>
                             @foreach ($tenancy as $landlord)
-        <input name="landlord_id" value="{{$landlord->landlord_id}}" readonly>
+        <input name="landlord_id" type="hidden" value="{{$landlord->landlord_id}}" readonly>
     @endforeach
                             
                             <div class="form-group row">

@@ -1,9 +1,23 @@
 @extends('layouts/main')
 @section('title')
-  Create a Watchlist
+  Edit a Watchlist
 @endsection
 
 @section('content')
+@if ($errors->any())
+    <div class="row mx-auto text-center">
+      <div class="col-md-12">
+        <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+        </div>
+      </div>
+    </div>
+@endif
+
 <div class="container">
   <h1>Create Project</h1>
   <h6>This is where all your projects are located</h6>

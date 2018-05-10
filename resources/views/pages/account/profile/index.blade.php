@@ -20,7 +20,7 @@
                 --}}
 
                 @if($currentUser->userType == "Landlord")
-                    @if($Tenancy == null || $user->userType == "Tenant" && $currentUser->id != $user->id && $Tenancy->accepted == 0 && $Tenancy->request_sent == 0)
+                    @if($Tenancy == null || $user->userType == "Tenant" && $currentUser->id != $user->id && $Tenancy->accepted == null)
                         <a href="/account/tenancy/{{$user->id}}/create" class="btn btn-primary">Start Tenancy</a>
                     @elseif($Tenancy->request_sent == 1 && $Tenancy->accepted == 0 && $user->userType == "Tenant" && $currentUser->id == $Tenancy->landlord_id && $user->id == $Tenancy->tenant_id)
                         <span>Request already sent</span>
@@ -35,7 +35,8 @@
                     Only the relevant tenant can see these (id if tenancy id, is the profiles user id)
 
                 --}}
-
+                
+                @if(!empty($tenancy))
                 @if($currentUser->userType == "Tenant")
                     @if($tenancy == null || $tenancy->accepted == 0 && $tenancy->request_sent == 1 && $tenancy->tenant_id == $user->id)
                         
@@ -48,6 +49,7 @@
                             <input type="submit" class="btn btn-warning" value="Reject Request">
                         </form>
                     @endif
+                @endif
 
                     {{-- 
                         If a tenancy is in place. Show the details.

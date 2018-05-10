@@ -47,6 +47,13 @@ class AccountController extends Controller
 
   //Stores data
   public function store(Request $request, User $user){
+
+    $this->validate($request, [
+      "tenant_name" => "required",
+      "landlord_name" => "required",
+      "property_address" => "required",
+    ]);
+
     $properties = PropertyAdvert::where('user_id', Auth::id())->get();
     $Tenancy = Tenancy::create([
       'tenant_id' => $request->tenant_id,
@@ -60,17 +67,6 @@ class AccountController extends Controller
     return redirect("/account/$user->id");
   }
   
-  // public function accept(Request $request, $id){
-  //   Tenancy::where('accepted', 0)->where('request_sent', 1)->where('tenant_id', Auth::id())->where('landlord_id', $id)
-  //           ->update(
-  //             [
-  //               'accepted' => 1,
-  //               'request_sent' => 0,
-  //             ]
-              
-  //           );
-  //   return back();
-  // }
 
   public function accept(Request $request, string $id)
   {
@@ -113,7 +109,10 @@ class AccountController extends Controller
   }
 
   public function searchresults(Request $request){
-    
+    $this->validate($request, [
+      "property_address" => "required",
+    ]);
+
     //Gets all users that are tenants
     $tenants = User::where('userType', 'tenant')->first();
     
