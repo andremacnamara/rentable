@@ -25,6 +25,15 @@ class ExpenseClaimerController extends Controller
     }
 
     public function store(Request $request){
+
+        $this->validate($request, [
+            "title" => "required",
+            "description" => "required",
+            "cost" => "required",
+            "receipt" => "required",
+            "property_address" => "required",
+          ]);
+        
         $ExpenseClaim = ExpenseClaim::create([
             'title' => $request->title,
             'description' => $request->description,
@@ -55,6 +64,15 @@ class ExpenseClaimerController extends Controller
       public function update(Request $request, $id){
         //Similar to Stores
         //Posts updated data
+
+        $this->validate($request, [
+            "title" => "required",
+            "description" => "required",
+            "cost" => "required",
+            "receipt" => "required",
+            "property_address" => "required",
+          ]);
+          
         ExpenseClaim::where('id', $id)->where('tenant_id', Auth::id())->update([
             'title' => $request->title,
             'description' => $request->description,

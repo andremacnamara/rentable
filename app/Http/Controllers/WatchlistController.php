@@ -30,6 +30,12 @@ class WatchlistController extends Controller
   }
 
   public function store(Request $request){
+
+    $this->validate($request, [
+      "title" => "required",
+      "active" => "required",
+    ]);
+
     $Watchlists = new Watchlists();
     if($request->active == 1){
       Watchlists::where('user_id', Auth::id())->where('active', 1)->update(["active" => 0]);
@@ -58,6 +64,12 @@ class WatchlistController extends Controller
   }
 
   public function update(Request $request, $id){
+
+    $this->validate($request, [
+      "title" => "required",
+      "active" => "required",
+    ]);
+    
     if($request->active == 1) {
         Watchlists::where('user_id', Auth::id())->where('active', 1)->update(["active" => 0]);
       }

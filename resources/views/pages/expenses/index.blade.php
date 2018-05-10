@@ -17,6 +17,7 @@
       </div>
     </div>
     
+    {{-- https://appdividend.com/2017/07/13/add-charts-laravel-using-chartjs/ --}}
     <div class="row">
       <div class="col-md-6">
         <div class="panel-body">
@@ -25,6 +26,7 @@
       </div>
     </div>
 
+    
     <script>
       var url = "{{url('/aggregatedpropertyoverview')}}";
       var Cost = new Array();

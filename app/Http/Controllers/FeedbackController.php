@@ -24,6 +24,20 @@ class FeedbackController extends Controller
     }
 
     public function store(Request $request){
+
+        $this->validate($request, [
+            "landlord_name" => "required",
+            "tenant_name"   => "required",
+            "property_address" => "required",
+            "overall_tenancy" => "required",
+            "landlord_communication" => "required",
+            "maintainence_response" => "required",
+            "rent_reflect" => "required",
+            "happy_continue" => "required",
+            "comment" => "required",
+            "refer" => "required",
+          ]);
+          
         $feedback = Feedback::create([
             "landlord_name" => $request->landlord_name,
             "landlord_id"   => $request->landlord_id,
@@ -39,7 +53,7 @@ class FeedbackController extends Controller
             "recommend_landlord" => $request->refer
         ]);
 
-        return redirect("/");
+        return redirect("/feedback");
     }
 
     public function show($id){

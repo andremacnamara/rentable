@@ -3,18 +3,24 @@
   Create your Ad
 @endsection
 @section('content')
+@if ($errors->any())
+    <div class="row mx-auto text-center">
+      <div class="col-md-12">
+        <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+        </div>
+      </div>
+    </div>
+@endif
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card card-default">
         <div class="card-header">Advertise Your Property</div>
-        @if (count($errors) > 0)
-          <ul>
-            @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-        @endif
         <div class="card-body">
           <!-- Form for posting the property advert -->
           <form method="POST" action="/property" enctype="multipart/form-data">

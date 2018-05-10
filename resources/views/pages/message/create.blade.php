@@ -5,6 +5,19 @@
 @endsection
 
 @section('content')
+    @if ($errors->any())
+        <div class="row mx-auto text-center">
+        <div class="col-md-12">
+            <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            </div>
+        </div>
+        </div>
+    @endif
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">
@@ -33,7 +46,7 @@
                                     <div class="form-group row mb-4">
                                         <label for="title" class="col-md-3 col-form-label text-md-right">Title</label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control" name="title">
+                                            <input type="text" class="form-control" name="title" required>
                                         </div>
                                     </div>
                                 </div>
@@ -44,7 +57,7 @@
                                     <div class="form-group row mb-4">
                                         <label for="message" class="col-md-3 col-form-label text-md-right">Message</label>
                                         <div class="col-md-9">
-                                            <textarea class="form-control" name="message"></textarea>
+                                            <textarea class="form-control" name="message" required></textarea>
                                         </div>
                                     </div>
                                 </div>
