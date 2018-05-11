@@ -103,7 +103,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <button class="mt-2 btn btn-primary" type="submit">Submit Preferances</button>
+                                <button class="mt-2 btn btn-primary" name="submit" type="submit">Submit Preferances</button>
                             </form>
                         </div>
                     </div>
