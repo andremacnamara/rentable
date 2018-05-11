@@ -46,7 +46,7 @@ class AccountController extends Controller
   }
 
   //Stores data
-  public function store(Request $request, User $user){
+  public function store(Request $request){
 
     $this->validate($request, [
       "tenant_name" => "required",
@@ -63,8 +63,8 @@ class AccountController extends Controller
       'property_address' => $request->property_address,
     ]);
 
-    
-    return redirect("/account/$user->id");
+    $id = $Tenancy->tenant_id;
+    return redirect("/account/$id");
   }
   
 
@@ -91,13 +91,15 @@ class AccountController extends Controller
       return back();
   }
   
-  public function end(Request $request){
-    Tenancy::where('accepted', 1)->update(
-      [
-        'accepted' => 0,
-      ]
-    );
-    return back();
+  public function end(Request $request, string $id)
+  {
+      Tenancy::find($id)
+          ->update([
+              'request_sent' => 0,
+              'accepted' => 0,
+          ]);
+  
+      return back();
   }
 
   public function searchhome(){
@@ -105,7 +107,7 @@ class AccountController extends Controller
       //Populates fields.
       $user = Auth::user();
       $properties = PropertyAdvert::where('user_id', Auth::id())->get();
-      return view('pages/account/search/index', compact('user', 'properties'));
+      return view('pages/tenant-search/index', compact('user', 'properties'));
   }
 
   public function searchresults(Request $request){
@@ -137,7 +139,7 @@ class AccountController extends Controller
 
     $users = $result->get();
     
-    return view('pages/account/search/results', compact('users'));
+    return view('pages/tenant-search/results', compact('users'));
   }
 
   public function show(){
