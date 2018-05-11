@@ -22,9 +22,11 @@
                 <div class="col-md-10">
                   <select class="form-control" id="property_address" name="property_address">
                     <!--Gets all counties from DB -->
-                    @foreach ($properties as $property)
-                      <option value="{{$property->address . ', ' . $property->town . ', ' . $property->county}}">{{$property->address . ', ' . $property->town . ', ' . $property->county}}</option>
-                    @endforeach
+                    @if(!empty($properties))
+                      @foreach ($properties as $property)
+                        <option value="{{$property->address . ', ' . $property->town . ', ' . $property->county}}">{{$property->address . ', ' . $property->town . ', ' . $property->county}}</option>
+                      @endforeach
+                    @endif
                   </select>
                 </div> <!-- ./ col-6-->
               </div> <!-- ./ row-5  -->

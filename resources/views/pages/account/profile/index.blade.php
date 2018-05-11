@@ -18,9 +18,12 @@
                     If it has been sent, doesn't show add, and shows message.
                     Does not show button to tenant.
                 --}}
-
+                
+          
                 @if($currentUser->userType == "Landlord")
-                    @if($Tenancy == null || $user->userType == "Tenant" && $currentUser->id != $user->id && $Tenancy->accepted == null)
+                    @if($currentUser->id == $user->id)
+                        <span>You cannot add yourself</span>
+                    @elseif($Tenancy == null || $user->userType == "Tenant" && $currentUser->id != $user->id && $Tenancy->accepted == 0 && $Tenancy->request_sent == 0)
                         <a href="/account/tenancy/{{$user->id}}/create" class="btn btn-primary">Start Tenancy</a>
                     @elseif($Tenancy->request_sent == 1 && $Tenancy->accepted == 0 && $user->userType == "Tenant" && $currentUser->id == $Tenancy->landlord_id && $user->id == $Tenancy->tenant_id)
                         <span>Request already sent</span>
@@ -28,6 +31,7 @@
                         <span>You are in tenancy with this person</span>
                     @endif
                 @endif
+                
                 
                 {{--
                     Provides tenant ability to accept/reject the request from landlord.
@@ -111,6 +115,7 @@
                     @endif
           
                     <div class="row py-2">
+                    @if(!empty($properties))
                         @foreach ($properties as $property)
                             <div class="col-md-4 mb-4">
                                 <a href="/property/{{$property->id}}">
@@ -119,11 +124,13 @@
                                 <p class="mt-2">{{$property->address .', '. $property->town .', '. $property->county}}</p>
                             </div>
                         @endforeach
+                    @endif
                     </div>
                 </div>
                 <div class="col-md-3 spacing">
                 <table class="table">
                     <p class="text-sub-title">Your Tenants</p>
+                    @if(!empty($landlordTenancies))
                         @foreach ($landlordTenancies as $Tenant)
                             <tr>
                                 <td>
@@ -138,6 +145,7 @@
                                 </td>
                             </tr>
                         @endforeach
+                    @endif
                         
                 </table>
             </div>

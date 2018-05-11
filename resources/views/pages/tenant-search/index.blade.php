@@ -28,7 +28,8 @@
             <div class="row">
               <div class="col-md-10">
                 <select class="form-control" id="property_address" name="property_address">
-                  <!--Gets all counties from DB -->
+                    @if(!empty($properties))
+                    <!--Gets all counties from DB -->
                     @foreach ($properties as $property)
                       <option value="{{$property->id}}">{{$property->address . ', ' . $property->town . ', ' . $property->county}}</option>
                     @endforeach
