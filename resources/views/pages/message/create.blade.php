@@ -65,7 +65,7 @@
 
                             <div class="row mt-4 ml-4">
                                 <div class="col-md-12">
-                                    <input type="submit" value="Send Message" class="float-left border border-secondary btn btn-default">
+                                    <input type="submit" name="send" value="Send Message" class="float-left border border-secondary btn btn-default">
                                 </div>
                             </div>
 

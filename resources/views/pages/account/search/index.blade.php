@@ -38,7 +38,7 @@
          
             <div class="row mt-md-4">
                 <div class="col-md-4">
-                    <button type="submit" class="form-control btn btn-primary">
+                    <button type="submit" name="search" value="search" class="form-control btn btn-primary">
                         Search
                     </button>
                 </div>

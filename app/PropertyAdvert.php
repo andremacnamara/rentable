@@ -19,5 +19,9 @@ class PropertyAdvert extends Model
     public function expenses(){
       return $this->hasMany('App\PropertyExpense');
     }
+
+    public function name(){
+      return "Fallout 4";
+    }
 }
 
