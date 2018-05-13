@@ -12,7 +12,8 @@ class TenantPreferanceController extends Controller {
     
     public function index(){
         $user = Auth::user();
-        return view('pages/account/tenancy/preferences/index', compact('user'));
+        $tenantPreferance = TenantPreferance::where('user_id', Auth::user()->id)->first();
+        return view('pages/preferences/index', compact('user', 'tenantPreferance'));
     }
 
     public function create(){
@@ -22,7 +23,7 @@ class TenantPreferanceController extends Controller {
         $specs  = DB::table('property_specs')->get();
         $user = Auth::user();
 
-        return view('pages/account/tenancy/preferences/create', compact('counties', 'propertyType', 'specs', 'user'));
+        return view('pages/preferences/create', compact('counties', 'propertyType', 'specs', 'user'));
     }
 
     public function store(Request $request){
@@ -54,7 +55,7 @@ class TenantPreferanceController extends Controller {
         $user = Auth::user();
         $TenantPreferance = TenantPreferance::where('id', $id)->first();
         
-        return view('pages/account/tenancy/preferences/show', compact('TenantPreferance', 'user'));
+        return view('pages/preferences/show', compact('TenantPreferance', 'user'));
     }
 
     public function edit($id){
@@ -65,7 +66,7 @@ class TenantPreferanceController extends Controller {
       $types    = DB::table('property_type')->get();
       $user = Auth::user();
 
-      return view ('pages/account/tenancy/preferences/edit', compact( 'counties', 'specs', 'tenantPreferance', 'types', 'user'));
+      return view ('pages/preferences/edit', compact( 'counties', 'specs', 'tenantPreferance', 'types', 'user'));
     }
 
     public function update(Request $request, $id){

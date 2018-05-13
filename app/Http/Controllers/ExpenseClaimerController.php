@@ -44,7 +44,8 @@ class ExpenseClaimerController extends Controller
             'property_address' => $request->property_address,
         ]);
 
-        return redirect("/");
+        $id = $ExpenseClaim->id;
+        return redirect("/expenseclaim/show/$id");
     }
 
     public function show($id){

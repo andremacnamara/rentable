@@ -25,7 +25,6 @@
         </div>
       </div>
     </div>
-
     
     <script>
       var url = "{{url('/aggregatedpropertyoverview')}}";
@@ -47,7 +46,6 @@
               datasets: [{
                 data: Cost
               }],
-            // These labels appear in the legend and in the tooltips when hovering different arcs
             labels:  Category
             }
           });

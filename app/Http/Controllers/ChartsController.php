@@ -11,17 +11,17 @@ class ChartsController extends Controller
 {
 
     public function AggregatedPropertyOverview(){
-            $user = Auth::user()->id;
-            $result = DB::table('property_expenses')
-                        ->where('user_id', $user)
-                        ->get();
-            return response()->json($result);
-        }
+        $user = Auth::user()->id;
+        $result = DB::table('property_expenses')
+                    ->where('user_id', $user)
+                    ->get();
+        return response()->json($result);
+    }
 
     public function uniquePropertyOverview($id){
         $result = DB::table('property_expenses')
                     ->where('property_id', $id)
                     ->get();
-            return response()->json($result);
+        return response()->json($result);
     }
 }
