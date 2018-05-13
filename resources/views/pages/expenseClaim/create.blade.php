@@ -39,7 +39,7 @@
           <label for="property_address">Property Address</label>
         </div>
       </div>
-      @if(!empty($recievedMessages))
+      @if(!empty($tenancy))
         @foreach($tenancy as $tenant)
           <input type="hidden" class="btn btn-primary mb-2" name="landlord_id" value="{{$tenant->landlord_id}}">
           <input type="hidden" class="btn btn-primary mb-2" name="tenant_id" value="{{$tenant->tenant_id}}">

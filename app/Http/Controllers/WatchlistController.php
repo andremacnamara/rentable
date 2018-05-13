@@ -21,12 +21,12 @@ class WatchlistController extends Controller
     $user = Auth::user();
     $Watchlists = Watchlists::where('user_id', Auth::id())->get();
 
-    return view('/pages/account/watchlist/index', compact('Watchlists', 'user'));
+    return view('/pages/watchlist/index', compact('Watchlists', 'user'));
   }
 
   public function create(){
     $user = Auth::user();
-    return view('/pages/account/watchlist/create', compact('user'));
+    return view('/pages/watchlist/create', compact('user'));
   }
 
   public function store(Request $request){
@@ -54,13 +54,13 @@ class WatchlistController extends Controller
   public function show($id){
     $Watchlists = Watchlists::where('id', $id)->first();
     $user = Auth::user();
-    return view('pages/account/watchlist/show', compact('Watchlists', 'user'));
+    return view('pages/watchlist/show', compact('Watchlists', 'user'));
   }
 
   public function edit($id){
     $Watchlists = Watchlists::where('id', $id)->first();
     $user = Auth::user();
-    return view('pages/account/watchlist/edit', compact('Watchlists', 'user'));
+    return view('pages/watchlist/edit', compact('Watchlists', 'user'));
   }
 
   public function update(Request $request, $id){

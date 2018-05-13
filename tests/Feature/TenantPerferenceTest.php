@@ -15,7 +15,7 @@ class MessageTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testTenantPerference()
     {
         
         $this->be(User::find(1));
@@ -26,6 +26,6 @@ class MessageTest extends TestCase
         ->type('1000', 'rent')
         ->type('2', 'bedrooms')
         ->type('4', 'bathrooms')
-        ->press('submit');
+        ->press('sbmit');
     }
 }

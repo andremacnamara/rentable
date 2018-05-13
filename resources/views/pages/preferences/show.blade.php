@@ -71,12 +71,10 @@
                 </div>
 
                 <div class="row mt-4">
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                     <a href="/account/preferance/{{$TenantPreferance->id}}/edit" class="btn btn-primary">Edit Preferences</a>
                   </div>
-                  <div class="col-md-6">
-                    <a href="/account/preferance/{{$TenantPreferance->id}}/delete" class="btn btn-info">Remove Entry</a>
-                  </div>
+                  
                 </div>
               </center>
             </div>

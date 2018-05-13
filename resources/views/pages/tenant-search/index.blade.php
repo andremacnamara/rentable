@@ -33,6 +33,7 @@
                     @foreach ($properties as $property)
                       <option value="{{$property->id}}">{{$property->address . ', ' . $property->town . ', ' . $property->county}}</option>
                     @endforeach
+                    @endif
                 </select>
               </div> <!-- ./ col-6-->
             </div> <!-- ./ row-5  -->
