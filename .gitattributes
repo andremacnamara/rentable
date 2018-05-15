@@ -1,8 +1,3 @@
-
-* text=auto
-*.css linguist-vendored
-*.scss linguist-vendored
-*.js linguist-vendored
-CHANGELOG.md export-ignore
-
-.blade.php linguist-language=php
+static/* linguist-vendored
+docs/* linguist-documentation
+*.blade.php linguist-language=php
