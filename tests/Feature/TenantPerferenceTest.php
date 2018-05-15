@@ -17,6 +17,7 @@ class MessageTest extends TestCase
      */
     public function testTenantPerference()
     {
+        //https://laravel.com/docs/5.6/testing
         
         $this->be(User::find(1));
 
