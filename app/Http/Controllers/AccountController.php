@@ -17,7 +17,8 @@ class AccountController extends Controller
 
   public function index($id){
   
-    $user = Auth::user();
+    $currentUser = Auth::user();
+    $user = User::where('id', $id)->first();
     $properties = PropertyAdvert::where('user_id', $id)->get();
     $property = WatchedProperties::all();
     $Watchlists = Watchlists::where('user_id', Auth::id())->get();
@@ -29,16 +30,10 @@ class AccountController extends Controller
     //Allows the attirbutes from the table to be access by correct landlord and tenant
     $tenancy = Tenancy::where('tenant_id', Auth::id())->first();
     $Tenancy = Tenancy::where('landlord_id', Auth::id())->first();
-
+    
     //Sends different use types to relevant view
 
-    if($user->userType == "Landlord"){
-      return view('/pages/account/landlord', compact('properties', 'user', 'Watchlists', 'property', 'landlordTenancies', 'Tenancy'));
-    }
-    
-    else{
-      return view('/pages/account/tenant', compact('properties', 'user', 'Watchlists', 'property', 'tenantTenancies', 'tenancy'));
-    }
+    return view('/pages/account/profile/index', compact('properties', 'currentUser', 'user', 'Watchlists', 'property', 'tenantTenancies', 'landlordTenancies', 'Tenancy', 'tenancy'));
   }
 
   //Renders Form
@@ -51,7 +46,14 @@ class AccountController extends Controller
   }
 
   //Stores data
-  public function store(Request $request, User $user){
+  public function store(Request $request){
+
+    $this->validate($request, [
+      "tenant_name" => "required",
+      "landlord_name" => "required",
+      "property_address" => "required",
+    ]);
+
     $properties = PropertyAdvert::where('user_id', Auth::id())->get();
     $Tenancy = Tenancy::create([
       'tenant_id' => $request->tenant_id,
@@ -61,40 +63,43 @@ class AccountController extends Controller
       'property_address' => $request->property_address,
     ]);
 
-    
-    return redirect("/account/$user->id");
+    $id = $Tenancy->tenant_id;
+    return redirect("/account/$id");
   }
   
-  public function accept(Request $request, User $user){
-    Tenancy::where('accepted', 0)->where('request_sent', 1)->where('tenant_id', Auth::id())
-            ->update(
-              [
-                'accepted' => 1,
-                'request_sent' => 0,
-              ]
-              
-            );
-    return back();
+
+  public function accept(Request $request, string $id)
+  {
+      Tenancy::find($id)
+          ->update([
+              'accepted' => 1,
+              'request_sent' => 0
+          ]);
+  
+      return back();
   }
 
-  public function reject(Request $request){
-    Tenancy::where('accepted', 0)->where('request_sent', 1)->where('tenant_id', Auth::id())
-            ->update(
-              [
-                'accepted' => 0,
-                'request_sent' => 0,
-              ]
-            );
-    return back();
+
+  public function reject(Request $request, string $id)
+  {
+      Tenancy::find($id)
+          ->update([
+              'request_sent' => 0,
+              'accepted' => 0,
+          ]);
+  
+      return back();
   }
   
-  public function end(Request $request){
-    Tenancy::where('accepted', 1)->update(
-      [
-        'accepted' => 0,
-      ]
-    );
-    return back();
+  public function end(Request $request, string $id)
+  {
+      Tenancy::find($id)
+          ->update([
+              'request_sent' => 0,
+              'accepted' => 0,
+          ]);
+  
+      return back();
   }
 
   public function searchhome(){
@@ -102,11 +107,14 @@ class AccountController extends Controller
       //Populates fields.
       $user = Auth::user();
       $properties = PropertyAdvert::where('user_id', Auth::id())->get();
-      return view('pages/account/search/index', compact('user', 'properties'));
+      return view('pages/tenant-search/index', compact('user', 'properties'));
   }
 
   public function searchresults(Request $request){
-    
+    $this->validate($request, [
+      "property_address" => "required",
+    ]);
+
     //Gets all users that are tenants
     $tenants = User::where('userType', 'tenant')->first();
     
@@ -131,7 +139,7 @@ class AccountController extends Controller
 
     $users = $result->get();
     
-    return view('pages/account/search/results', compact('users'));
+    return view('pages/tenant-search/results', compact('users'));
   }
 
   public function show(){

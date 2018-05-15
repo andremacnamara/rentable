@@ -49,7 +49,7 @@ Route::get('/user/search', 'AccountController@searchhome')->middleware('auth');
 Route::get('/user/search/results', 'AccountController@searchresults')->middleware('auth');
 
 //Routes for preference form
-Route::get('/account/preferance', 'TenantPreferanceController@index')->middleware('auth');
+Route::get('/preferance', 'TenantPreferanceController@index')->middleware('auth');
 Route::get('/account/preferance/create', 'TenantPreferanceController@create')->middleware('auth');
 Route::post('/account/preferance', 'TenantPreferanceController@store')->middleware('auth');
 Route::get('/account/preferance/{id}', 'TenantPreferanceController@show')->middleware('auth');
@@ -57,12 +57,42 @@ Route::get('/account/preferance/{id}/edit', 'TenantPreferanceController@edit')->
 Route::put('/account/preferance/{id}', 'TenantPreferanceController@update')->middleware('auth');
 Route::get('/account/preferance/{id}/delete', 'TenantPreferanceController@destroy')->middleware('auth');
 
-
 //Expenses
 Route::get('/expenses', 'PropertyExpenseController@index')->middleware('auth');
 Route::get('/expenses/{id}/create', 'PropertyExpenseController@create')->middleware('auth');
 Route::post('/expenses', 'PropertyExpenseController@store')->middleware('auth');
-Route::get('/expenses/{id}', 'PropertyExpenseController@show')->middleware('auth');
+Route::get('/expenses/property/{id}', 'PropertyExpenseController@show')->middleware('auth');
+Route::get('/chart', 'PropertyExpenseController@chart');
+
+//Feedback
+Route::get('/feedback', 'FeedbackController@index')->middleware('auth');
+Route::get('/feedback/create', 'FeedbackController@create')->middleware('auth');
+Route::post('/feedback', 'FeedbackController@store')->middleware('auth');
+Route::get('/feedback/results/{id}', 'FeedbackController@show')->middleware('auth');
+
+//Messages
+Route::get('/messages/index', 'MessageController@index')->middleware('auth');
+Route::get('/messages/{id}/create', 'MessageController@create')->middleware('auth');
+Route::post('/messages', 'MessageController@store')->middleware('auth');
+Route::get('/messages/show/{id}', 'MessageController@show')->middleware('auth');
+Route::get('/messages/inbox', 'MessageController@inbox')->middleware('auth');
+Route::get('/messages/sentbox', 'MessageController@sentbox')->middleware('auth');
+
+//ExpenseClaimer
+Route::get('/expenseclaim/home', 'ExpenseClaimerController@index')->middleware('auth');
+Route::get('/expenseclaim/create', 'ExpenseClaimerController@create')->middleware('auth');
+Route::post('/expenseclaim', 'ExpenseClaimerController@store')->middleware('auth');
+Route::get('/expenseclaim/show/{id}', 'ExpenseClaimerController@show')->middleware('auth');
+Route::get('/expenseclaim/{id}/edit', 'ExpenseClaimerController@edit')->middleware('auth');
+Route::put('/expenseclaim/{id}', 'ExpenseClaimerController@update')->middleware('auth');
+//Changing status
+Route::get('/expenseclaim/{id}/approve', 'ExpenseClaimerController@approve')->middleware('auth');
+Route::put('/expenseclaim/show/{id}', 'ExpenseClaimerController@changeStatus')->middleware('auth');
+
+
+//Charts
+Route::get('/aggregatedpropertyoverview', 'ChartsController@AggregatedPropertyOverview');
+Route::get('/uniquepropertyoverview/{id}', 'ChartsController@uniquePropertyOverview');
 
 
 //Route::get('select2-autocomplete', 'Select2AutocompleteController@layout');

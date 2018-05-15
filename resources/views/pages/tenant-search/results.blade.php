@@ -7,7 +7,7 @@
 <div class="container">
   @foreach ($users as $user)
     <div class="card mb-md-4">
-      <div class="card-header"><h5><a href="/account/{{$user->id}}">{{$user->user_name}}</a><h5></div>
+      <div class="card-header"><h5><a href="/account/{{$user->user_id}}">{{$user->user_name}}</a><h5></div>
         <div class="card-body">
           <div class="row">
             <div class="col-md-12">

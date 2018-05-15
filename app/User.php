@@ -50,4 +50,7 @@ class User extends Authenticatable
       return $this->hasMany('App\Tenancy');
     }
 
+    public function feedback(){
+        return $this->hasMany('App\Feedback');
+    }
 }

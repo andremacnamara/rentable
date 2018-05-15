@@ -28,17 +28,19 @@
             <div class="row">
               <div class="col-md-10">
                 <select class="form-control" id="property_address" name="property_address">
-                  <!--Gets all counties from DB -->
+                    @if(!empty($properties))
+                    <!--Gets all counties from DB -->
                     @foreach ($properties as $property)
                       <option value="{{$property->id}}">{{$property->address . ', ' . $property->town . ', ' . $property->county}}</option>
                     @endforeach
+                    @endif
                 </select>
               </div> <!-- ./ col-6-->
             </div> <!-- ./ row-5  -->
          
             <div class="row mt-md-4">
                 <div class="col-md-4">
-                    <button type="submit" class="form-control btn btn-primary">
+                    <button type="submit" name="search" value="search" class="form-control btn btn-primary">
                         Search
                     </button>
                 </div>

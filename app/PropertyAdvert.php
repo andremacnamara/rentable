@@ -8,7 +8,7 @@ class PropertyAdvert extends Model
 {
      protected $fillable = ["photo", "address", "county", "town","type","rent","date","bedrooms","bathrooms","furnished","description", "user_id"];
 
-     public function user(){
+    public function user(){
       return $this->belongsTo('App\User');
     }
 
@@ -18,6 +18,10 @@ class PropertyAdvert extends Model
 
     public function expenses(){
       return $this->hasMany('App\PropertyExpense');
+    }
+
+    public function name(){
+      return "Fallout 4";
     }
 }
 
