@@ -17,6 +17,7 @@ class PropertyAdvertTest extends TestCase
      */
     public function testPropertyAdvert()
     {
+        //https://laravel.com/docs/5.6/testing
         
         //Authenticates User id:1
         $this->be(User::find(1));
