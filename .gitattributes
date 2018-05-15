@@ -5,6 +5,4 @@
 *.js linguist-vendored
 CHANGELOG.md export-ignore
 
-* linguist-vendored
-*.php linguist-vendored=false
-*.html linguist-vendored=false
+.blade.php linguist-language=php
