@@ -6,4 +6,4 @@
 CHANGELOG.md export-ignore
 
 * linguist-vendored
-*.blade.php linguist-vendored=false
+*.php linguist-vendored=false
