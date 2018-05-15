@@ -3,4 +3,5 @@ docs/* linguist-documentation
  *.scss linguist-vendored
  *.js linguist-vendored
   *.blade linguist-vendored
+  *.blade.php linguist-vendored
 +static/* linguist-vendored
