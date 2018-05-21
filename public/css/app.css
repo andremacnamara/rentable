@@ -27,6 +27,66 @@ ul a:hover {
   color: red;
 }
 
+.descrition {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #777;
+}
+
+.details-box {
+  text-align: center;
+}
+
+.text-box {
+  top: 100%;
+  left: 70%;
+  /*Transform in relation to element itself, not parent */
+  text-align: center;
+}
+
+.border-grey {
+  border-color: #dce0e8;
+}
+
+.butn:link,
+.butn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 40px;
+  display: inline-block;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+  position: relative;
+}
+
+.butn:hover {
+  -webkit-transform: translateY(-3px);
+          transform: translateY(-3px);
+  /* X, Y, Blur, Color */
+  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.butn:active {
+  -webkit-transform: translateX(-1px);
+          transform: translateX(-1px);
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-edit,
+.btn-message {
+  background-color: #1e355b;
+  color: #fff;
+}
+
+.btn-profile {
+  background-color: #2a59a8;
+  color: #fff;
+}
+
 .list-image {
   position: relative;
   background: no-repeat center center;

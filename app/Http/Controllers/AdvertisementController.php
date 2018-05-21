@@ -80,8 +80,9 @@ class AdvertisementController extends Controller
 
     public function show($id){
       //Shows add user clicked on based on id
-      $user = User::where('id', $id)->first();
-      $Advert = PropertyAdvert::where('id', $id)->first();
+      $Advert = PropertyAdvert::find($id);
+      $user = $Advert->user;
+
       return view('pages/advert/show', compact('Advert', 'user'));
       
     }
