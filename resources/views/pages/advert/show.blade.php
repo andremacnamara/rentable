@@ -58,13 +58,15 @@
             </div>
           </div>
           
-          <div class="text-box">
-            <div class="row mx-auto mb-4">
-              <div class="col-md-12">
-                <a href="/property/{{$Advert->id}}/edit" class="butn btn-edit">Edit Property</a>
+          @if(Auth::user()->id == $user->id)
+            <div class="text-box">
+              <div class="row mx-auto mb-4">
+                <div class="col-md-12">
+                  <a href="/property/{{$Advert->id}}/edit" class="butn btn-edit">Edit Property</a>
+                </div>
               </div>
             </div>
-          </div>
+          @endif
 
         </div>
       </div>
