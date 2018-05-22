@@ -13,20 +13,21 @@
     </div>
 
     @if($user->userType == "Tenant")
-      @if($tenantPreferance->user_id == Auth::user()->id)
-        <div class="row text-center">
-          <div class="col-md-12">      
-            <a href="/account/preferance/{{$tenantPreferance->id}}/edit" class="btn btn-button">Edit Preferences</a>
+      @if(!empty($recievedMessages)) 
+        @if($tenantPreferance->user_id == Auth::user()->id)
+          <div class="row text-center">
+            <div class="col-md-12">      
+              <a href="/account/preferance/{{$tenantPreferance->id}}/edit" class="btn btn-button">Edit Preferences</a>
+            </div>
           </div>
-        </div>
+        @endif
+      @endif
 
-      @else
       <div class="row text-center">
           <div class="col-md-12">
               <a href="/account/preferance/create" class="btn btn-button">Set Preferences</a>
           </div>
       </div>
-    @endif
 
       <div class="row">
         <div class="col-md-12">

@@ -16,7 +16,7 @@
               <p>Property Type : {{$user->type}}</p>
               <p>Rent : {{$user->rent}}</p>
               <p>Bedrooms : {{$user->bedrooms}}</p>
-              <p>Bathrooms : {{$user->bedrooms}}</p>
+              <p>Bathrooms : {{$user->bathrooms}}</p>
             </div>
           </div>
         </div>

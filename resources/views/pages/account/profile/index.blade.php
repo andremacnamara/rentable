@@ -62,10 +62,6 @@
                
 
                     @if($tenancy->accepted == 1 && $tenancy->request_sent == 0  && $tenancy->tenant_id == $user->id ) 
-                    <form method="POST" action="/account/tenancy/{{$tenancy->id}}/end">
-                        {{ csrf_field() }}
-                        <input type="submit" class="btn btn-primary" value="End Tenancy">
-                    </form>
                     <h5>Currently in Tenancy with {{$tenancy->landlord_name}}</h5>
                     <h5>Your property is {{$tenancy->property_address}}</h5>
                     @endif

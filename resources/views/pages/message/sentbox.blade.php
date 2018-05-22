@@ -26,7 +26,7 @@
                             <th>Title</th>
                             <th>Sent To</th>
                             <th>Date</th>
-                            <th>Read</th>
+                            <th>Time</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,8 +37,9 @@
                                 <tr>
                                     <td><a href="/messages/show/{{$message->id}}">{{$message->title}}</a></td>
                                     <td>{{$message->recipient_name}}</td>
-                                    <td>{{$message->created_at}}</td>
-                                    <td>{{$message->read}}</td>
+                                    <td>{{ \Carbon\Carbon::parse($message->created_at)->format('d/m/Y')}}</td>
+                                    <td>{{$message->created_at->toTimeString()}}</td>
+                                    
                                 </tr>
                             @endforeach
                         @endif
