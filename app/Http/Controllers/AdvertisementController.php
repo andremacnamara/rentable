@@ -36,7 +36,7 @@ class AdvertisementController extends Controller
           return view('pages/advert/accesserror', compact('user'));
       }
       else {
-        return view('pages/advert/create', compact('user', 'county', 'types', 'specs', 'town'));
+        return view('pages/advert/create', compact('user', 'county', 'types', 'specs', 'towns'));
       }
     }
 
