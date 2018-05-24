@@ -96,6 +96,6 @@ Route::get('/uniquepropertyoverview/{id}', 'ChartsController@uniquePropertyOverv
 
 
 //Route::get('select2-autocomplete', 'Select2AutocompleteController@layout');
-Route::get('/townsearch', 'AdvertisementController@townload');
+// Route::get('/townsearch', 'AdvertisementController@townload');
 
 Auth::routes();

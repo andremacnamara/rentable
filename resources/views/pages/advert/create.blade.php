@@ -74,7 +74,7 @@
             <div class="form-group row">
               <label for="town" class="col-md-3 col-form-label text-md-right">Town</label>
               <div class="col-md-9">
-                <select class="town form-control" name="town">
+                <select class="form-control" name="town">
                 @foreach ($towns as $town)
                     <option>{{$town->name}}</option>
                   @endforeach

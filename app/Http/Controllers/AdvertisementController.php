@@ -142,18 +142,18 @@ class AdvertisementController extends Controller
     }
 
 
-    public function townload(Request $request){
-      //Typehead function.
-      //Route => Route::get('/townsearch', 'AdvertisementController@townload');
-      //
-    	$data = [];
-        if($request->has('q')){
-            $search = $request->q;
-            $data = DB::table("town")
-            		->select("id","name")
-            		->where('name','LIKE',"%".$search."%")
-            		->get();
-        }
-        return response()->json($data);
-    }
+    // public function townload(Request $request){
+    //   //Typehead function.
+    //   //Route => Route::get('/townsearch', 'AdvertisementController@townload');
+    //   //
+    // 	$data = [];
+    //     if($request->has('q')){
+    //         $search = $request->q;
+    //         $data = DB::table("town")
+    //         		->select("id","name")
+    //         		->where('name','LIKE',"%".$search."%")
+    //         		->get();
+    //     }
+    //     return response()->json($data);
+    // }
 }
