@@ -115,7 +115,7 @@ class SearchController extends Controller
       //Wathlists Logic
       $inspirationsArray = Watchlists::where('user_id', Auth::id())->where('active', 1)->first();
       $filteredData = $inspirationsArray;
-      if(count($inspirationsArray) >= 1) {
+      if(@count($inspirationsArray) >= 1) {
         $inspirationsArray = $inspirationsArray->properties;
         $arrayInfo = [];
         foreach($inspirationsArray as $image) {
