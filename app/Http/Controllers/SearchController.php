@@ -18,7 +18,7 @@ class SearchController extends Controller
       $types  = DB::table('property_type')->get();
       $towns = DB::table('town')->get();
       $specs  = DB::table('property_specs')->get();
-      return view('pages/search/index', compact('user', 'county', 'towns', 'types', 'specs'));
+      return view('pages/search/index', compact('user', 'county', 'towns','types', 'specs'));
     }
 
     public function search(Request $request){
@@ -115,7 +115,7 @@ class SearchController extends Controller
       //Wathlists Logic
       $inspirationsArray = Watchlists::where('user_id', Auth::id())->where('active', 1)->first();
       $filteredData = $inspirationsArray;
-      if(@count($inspirationsArray) >= 1) {
+      if($inspirationsArray) {
         $inspirationsArray = $inspirationsArray->properties;
         $arrayInfo = [];
         foreach($inspirationsArray as $image) {
