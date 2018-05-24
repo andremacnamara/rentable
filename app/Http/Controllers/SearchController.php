@@ -16,8 +16,9 @@ class SearchController extends Controller
       $user = Auth::user();
       $county = DB::table('county')->get();
       $types  = DB::table('property_type')->get();
+      $towns = DB::table('town')->get();
       $specs  = DB::table('property_specs')->get();
-      return view('pages/search/index', compact('user', 'county', 'types', 'specs'));
+      return view('pages/search/index', compact('user', 'county', 'towns', 'types', 'specs'));
     }
 
     public function search(Request $request){

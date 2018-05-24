@@ -47,6 +47,9 @@
             </div>
             <div class="col-md-6">
               <select class="town form-control" name="town">
+              @foreach ($towns as $town)
+                    <option>{{$town->name}}</option>
+                  @endforeach
               </select>
             </div>
           </div> <!-- ./Row2 -->
