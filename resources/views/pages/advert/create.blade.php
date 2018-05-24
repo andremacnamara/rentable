@@ -75,6 +75,9 @@
               <label for="town" class="col-md-3 col-form-label text-md-right">Town</label>
               <div class="col-md-9">
                 <select class="town form-control" name="town">
+                @foreach ($towns as $town)
+                    <option>{{$town->name}}</option>
+                  @endforeach
                 </select>
                 @if ($errors->has('town'))
                   <span class="invalid-feedback">

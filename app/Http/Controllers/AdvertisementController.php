@@ -26,6 +26,7 @@ class AdvertisementController extends Controller
       //Populates different options
       $county = DB::table('county')->get();
       $types  = DB::table('property_type')->get();
+      $towns = DB::table('town')->get();
       $specs  = DB::table('property_specs')->get();
       $user = Auth::user();
       
@@ -35,7 +36,7 @@ class AdvertisementController extends Controller
           return view('pages/advert/accesserror', compact('user'));
       }
       else {
-        return view('pages/advert/create', compact('user', 'county', 'types', 'specs'));
+        return view('pages/advert/create', compact('user', 'county', 'types', 'specs', 'town'));
       }
     }
 
