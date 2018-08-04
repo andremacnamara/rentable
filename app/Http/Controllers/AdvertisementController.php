@@ -33,7 +33,9 @@ class AdvertisementController extends Controller
 
       //Only allows landlords to post
       if($user->hasRole('Tenant')){
-          return view('pages/advert/accesserror', compact('user'));
+          flash('Access Denied')->warning();
+
+          return redirect('/');
       }
       else {
         return view('pages/advert/create', compact('user', 'county', 'types', 'specs', 'towns'));

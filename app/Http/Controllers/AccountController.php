@@ -119,7 +119,6 @@ class AccountController extends Controller
     ]);
 
     //Gets all users that are tenants
-    // $tenants = User::where('userType', 'tenant')->first();
     $roles = Role::all();
     
     $users = User::with('roles')->get();

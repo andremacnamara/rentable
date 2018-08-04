@@ -9,6 +9,7 @@
         "consoletvs/charts": "6.*",
         "fideloper/proxy": "~4.0",
         "khill/lavacharts": "~3.1",
+        "laracasts/flash": "^3.0",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "~1.0",
         "spatie/laravel-permission": "^2.13"

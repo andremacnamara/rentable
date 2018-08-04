@@ -3,6 +3,7 @@
   Create your Ad
 @endsection
 @section('content')
+
 @if ($errors->any())
     <div class="row mx-auto text-center">
       <div class="col-md-12">
