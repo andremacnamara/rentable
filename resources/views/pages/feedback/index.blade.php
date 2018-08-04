@@ -10,7 +10,8 @@
             <span>Feedback Center</span>
         </div>
     </div>
-    @if(Auth::user()->userType == "Tenant")
+    @if(auth()->user()->hasRole('Tenant'))
+    
       <div class="row text-center">
           <div class="col-md-12">
               <a href="/feedback/create" class="btn btn-button">Leave Feedback</a>

@@ -40,25 +40,7 @@
                                 @endif
                             </div>
                         </div>
-
-
-
-                        <!-- User Type -->
-                        <div class="form-group row">
-                          <label for="userType" class="col-md-4 col-form-label text-md-right">User Type</label>
-                            <div class="col-md-6">
-                              <select class ="form-control" id="userType" name="userType">
-                                <option>Landlord</option>
-                                <option>Tenant</option>
-                              </select>
-                              @if ($errors->has('userType'))
-                                  <span class="invalid-feedback">
-                                      <strong>{{ $errors->first('userType') }}</strong>
-                                  </span>
-                              @endif
-                            </div>
-                        </div>
-
+                        
                         <!-- Password -->
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>

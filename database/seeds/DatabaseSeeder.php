@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,6 +19,29 @@ class DatabaseSeeder extends Seeder
 
                 [
                     'name' => 'Dublin'
+                ]
+
+            ]);
+
+        }
+
+        if(DB::table('roles')->get()->count() == 0){
+
+            DB::table('roles')->insert([
+
+                [
+                    'name' => 'Administrator',
+                    'guard_name' => 'web'
+                ],
+
+                [
+                    'name' => 'Landlord',
+                    'guard_name' => 'web'
+                ],
+
+                [
+                    'name' => 'Tenant',
+                    'guard_name' => 'web'
                 ]
 
             ]);

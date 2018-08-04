@@ -19,7 +19,6 @@ class RegisterTest extends TestCase
         $this->visit('/register')
         ->type('Andre MacNamara', 'name')
         ->type('AndreMacNamara@test.com', 'email')
-        ->type('Landlord', 'userType')
         ->type('password', 'password')
         ->press('Register')
         ->seePageIs('/register');

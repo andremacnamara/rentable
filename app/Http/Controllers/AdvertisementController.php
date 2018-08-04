@@ -32,7 +32,7 @@ class AdvertisementController extends Controller
       
 
       //Only allows landlords to post
-      if($user->userType != "Landlord"){
+      if($user->hasRole('Tenant')){
           return view('pages/advert/accesserror', compact('user'));
       }
       else {

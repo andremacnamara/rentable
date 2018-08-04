@@ -12,6 +12,9 @@ use App\WatchedProperties;
 use App\TenantPreferance;
 use App\User;
 
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
 class AccountController extends Controller
 {
 
@@ -116,12 +119,24 @@ class AccountController extends Controller
     ]);
 
     //Gets all users that are tenants
-    $tenants = User::where('userType', 'tenant')->first();
+    // $tenants = User::where('userType', 'tenant')->first();
+    $roles = Role::all();
+    
+    $users = User::with('roles')->get();
+
+    $tenants = $users->reject(function ($user, $key) {
+        return $user->hasRole('Landlord');
+    });
+        
+    // $tenants = User::hasRole('Tenant')->first();
     
     //Gets all preferances
     $Prefereances = TenantPreferance::all()->first();
     //Gets the prefereances that match a tenant id
-    $pref = $Prefereances::where('user_id', $tenants->id)->first();
+
+    foreach($tenants as $tenant){
+        $pref = $Prefereances::where('user_id', $tenant->id)->first();
+    }
 
     //Gets the current signed in users property
     $selectedPropertyId = $request->property_address;

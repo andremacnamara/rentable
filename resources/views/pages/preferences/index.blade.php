@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    @if($user->userType == "Tenant")
+    @if($user->hasRole('Tenant'))
       @if(!empty($recievedMessages)) 
         @if($tenantPreferance->user_id == Auth::user()->id)
           <div class="row text-center">
