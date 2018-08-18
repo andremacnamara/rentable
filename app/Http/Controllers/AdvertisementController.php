@@ -2,28 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\UploadRequest;
+
+use Auth;
+use DB;
+
 use App\PropertyAdvert;
 use App\PropertyAdvertPhoto;
-use DB;
 use App\User;
-use Auth;
+
+use App\Mail\AdvertPosted;
+
+
+use App\Http\Requests\UploadRequest;
+use Illuminate\Http\Request;
+
+
 
 class AdvertisementController extends Controller
 {
 
     public function index(){
-      //Returns index page.
-      //Options
       $user = Auth::user();
       $Advert = PropertyAdvert::get();
       return view('pages/advert/index', compact('Advert', 'user'));
     }
 
     public function create(){
-      //Create Form
-      //Populates different options
+     
       $county = DB::table('county')->get();
       $types  = DB::table('property_type')->get();
       $towns = DB::table('town')->get();
@@ -74,6 +79,9 @@ class AdvertisementController extends Controller
           "user_id" => Auth::id(),
       ]);
 
+      
+      //Sends email off to user
+      \Mail::to(auth()->user())->send(new AdvertPosted(auth()->user(), $Advert));
 
       //Gets the advertid for redirect to show page
       $id = $Advert->id;
