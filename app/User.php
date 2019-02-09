@@ -59,4 +59,12 @@ class User extends Authenticatable
     public function feedback(){
         return $this->hasMany('App\Feedback');
     }
+
+    public function accountVerified(){
+      if($this->approved == 1){
+        return true;
+      }
+
+      return false;
+    }
 }

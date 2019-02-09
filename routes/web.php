@@ -11,28 +11,31 @@
 |
 */
 
-Route::get('/', 'PageController@index');
+Route::get('/', 'PageController@index')->name('home');
 
 //Advertisement
-Route::prefix('property')->middleware('auth')->group(function () {
+Route::prefix('property')->group(function () {
     Route::get('/', 'AdvertisementController@index')->name('property.index');
-    Route::get('/advertise/create', 'AdvertisementController@create')->name('property.create');
-    Route::post('/', 'AdvertisementController@store')->name('property.store');
-    Route::get('/{id}', 'AdvertisementController@show')->name('property.show');
-    Route::get('/{id}/edit', 'AdvertisementController@edit')->name('property.edit');
-    Route::put('/{id}', 'AdvertisementController@update')->name('property.update');
-    Route::get('/{id}/archive', 'AdvertisementController@archive')->name('property.archive');
+    
+    Route::group(['middleware' => ['auth', 'account.approved']], function () {
+        Route::get('/advertise/create', 'AdvertisementController@create')->name('property.create');
+        Route::post('/', 'AdvertisementController@store')->name('property.store');
+        Route::get('/{id}', 'AdvertisementController@show')->name('property.show');
+        Route::get('/{id}/edit', 'AdvertisementController@edit')->name('property.edit');
+        Route::put('/{id}', 'AdvertisementController@update')->name('property.update');
+        Route::get('/{id}/archive', 'AdvertisementController@archive')->name('property.archive');
+    });
 });
 
 
 //SearchController
-Route::prefix('search')->middleware('auth')->group(function () {
+Route::prefix('search')->middleware(['auth', 'account.approved'])->group(function () {
     Route::get('/', 'SearchController@index')->name('search');
     Route::get('/results', 'SearchController@search')->name('search.results');
 });
 
 //Watchlist
-Route::prefix('watchlist')->middleware('auth')->group(function () {
+Route::prefix('watchlist')->middleware(['auth', 'account.approved'])->group(function () {
     Route::get('/', 'WatchlistController@index')->name('watchlist.results');
     Route::get('/create', 'WatchlistController@create')->name('watchlist.create');
     Route::post('/', 'WatchlistController@store')->name('watchlist.store');
@@ -46,20 +49,22 @@ Route::prefix('watchlist')->middleware('auth')->group(function () {
 //Accounts or Tenancies
 Route::prefix('account')->middleware('auth')->group(function () {
     Route::get('/{id}', 'AccountController@index')->name('account.index');
-    Route::get('/tenancy/{id}/create', 'AccountController@create')->name('tenancy.create');
-    Route::post('/tenancy/{id}', 'AccountController@store')->name('tenancy.store');
-    Route::post('/tenancy/{id}/accept', 'AccountController@accept')->name('tenancy.accept');
-    Route::post('/tenancy/{id}/reject', 'AccountController@reject')->name('tenancy.reject');
-    Route::post('/tenancy/{id}/end', 'AccountController@end')->name('tenancy.delete');
+    Route::group(['middleware' => 'account.approved'], function () {
+        Route::get('/tenancy/{id}/create', 'AccountController@create')->name('tenancy.create');
+        Route::post('/tenancy/{id}', 'AccountController@store')->name('tenancy.store');
+        Route::post('/tenancy/{id}/accept', 'AccountController@accept')->name('tenancy.accept');
+        Route::post('/tenancy/{id}/reject', 'AccountController@reject')->name('tenancy.reject');
+        Route::post('/tenancy/{id}/end', 'AccountController@end')->name('tenancy.delete');
+    });
 });
 
-Route::prefix('user')->middleware('auth')->group(function () {
+Route::prefix('user')->middleware(['auth', 'account.approved'])->group(function () {
     Route::get('/search', 'AccountController@searchhome')->name('user.search');
     Route::get('/search/results', 'AccountController@searchresults')->name('user.search.results');
 });
 
 //Routes for preference form
-Route::prefix('preferance')->middleware('auth')->group(function () {
+Route::prefix('preferance')->middleware(['auth', 'account.approved'])->group(function () {
     Route::get('/preferance', 'TenantPreferanceController@index')->name('preferance.index');
     Route::get('/account/preferance/create', 'TenantPreferanceController@create')->name('preferance.create');
     Route::post('/account/preferance', 'TenantPreferanceController@store')->name('preferance.store');
@@ -70,7 +75,7 @@ Route::prefix('preferance')->middleware('auth')->group(function () {
 });
 
 //Expenses
-Route::prefix('expenses')->middleware('auth')->group(function () {
+Route::prefix('expenses')->middleware(['auth', 'account.approved'])->group(function () {
     Route::get('/', 'PropertyExpenseController@index')->name('expenses.index');
     Route::get('/{id}/create', 'PropertyExpenseController@create')->name('expenses.create');
     Route::post('/', 'PropertyExpenseController@store')->name('expenses.store');
@@ -79,7 +84,7 @@ Route::prefix('expenses')->middleware('auth')->group(function () {
 });
 
 //Feedback
-Route::prefix('feedback')->middleware('auth')->group(function () {
+Route::prefix('feedback')->middleware(['auth', 'account.approved'])->group(function () {
     Route::get('/', 'FeedbackController@index')->name('feedback.index');
     Route::get('/create', 'FeedbackController@create')->name('feedback.index');
     Route::post('/', 'FeedbackController@store')->name('feedback.index');
@@ -87,7 +92,7 @@ Route::prefix('feedback')->middleware('auth')->group(function () {
 });
 
 //Messages
-Route::prefix('messages')->middleware('auth')->group(function () {
+Route::prefix('messages')->middleware(['auth', 'account.approved'])->group(function () {
     Route::get('/index', 'MessageController@index')->name('messages.index');
     Route::get('/{id}/create', 'MessageController@create')->name('messages.create');
     Route::post('/', 'MessageController@store')->name('messages.store');
@@ -98,7 +103,7 @@ Route::prefix('messages')->middleware('auth')->group(function () {
 
 
 //ExpenseClaimer
-Route::prefix('expenseclaim')->middleware('auth')->group(function () {
+Route::prefix('expenseclaim')->middleware(['auth', 'account.approved'])->group(function () {
     Route::get('/home', 'ExpenseClaimerController@index')->name('expenseclaim.index');
     Route::get('/create', 'ExpenseClaimerController@create')->name('expenseclaim.create');
     Route::post('/', 'ExpenseClaimerController@store')->name('expenseclaim.store');
@@ -106,13 +111,13 @@ Route::prefix('expenseclaim')->middleware('auth')->group(function () {
     Route::get('/{id}/edit', 'ExpenseClaimerController@edit')->name('expenseclaim.edit');
     Route::put('/{id}', 'ExpenseClaimerController@update')->name('expenseclaim.update');
     Route::get('/{id}/approve', 'ExpenseClaimerController@approve')->name('expenseclaim.approve');
-    Route::put('/show/{id}', 'ExpenseClaimerController@changeStatus')>name('expenseclaim.change.status');
+    Route::put('/show/{id}', 'ExpenseClaimerController@changeStatus')->name('expenseclaim.change.status');
 });
 
 //Charts
-Route::group(['middleware' => ['auth']], function () {
-    Route::get('/aggregatedpropertyoverview', 'ChartsController@AggregatedPropertyOverview');
-    Route::get('/uniquepropertyoverview/{id}', 'ChartsController@uniquePropertyOverview');
+Route::group(['middleware' => ['auth', 'account.approved']], function () {
+    Route::get('/aggregatedpropertyoverview', 'ChartsController@AggregatedPropertyOverview')->name('charts.aggregated.overview');
+    Route::get('/uniquepropertyoverview/{id}', 'ChartsController@uniquePropertyOverview')->name('charts.unique.overview');
 });
 
 //Route::get('select2-autocomplete', 'Select2AutocompleteController@layout');
