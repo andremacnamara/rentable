@@ -60,6 +60,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Feedback');
     }
 
+    public function notifications()
+    {
+      return $this->hasMany(Notifications::class, 'target_user_id', 'id');
+    }
+
     public function accountVerified(){
       if($this->approved == 1){
         return true;
