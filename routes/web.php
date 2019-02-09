@@ -14,86 +14,106 @@
 Route::get('/', 'PageController@index');
 
 //Advertisement
-Route::get('/property', 'AdvertisementController@index');
-Route::get('/property/advertise/create', 'AdvertisementController@create')->middleware('auth');
-Route::post('/property', 'AdvertisementController@store')->middleware('auth');;
-Route::get('/property/{id}', 'AdvertisementController@show');
-Route::get('/property/{id}/edit', 'AdvertisementController@edit')->middleware('auth');;
-Route::put('/property/{id}', 'AdvertisementController@update')->middleware('auth');;
-Route::get('/property/{id}/archive', 'AdvertisementController@archive')->middleware('auth');;
+Route::prefix('property')->middleware('auth')->group(function () {
+    Route::get('/', 'AdvertisementController@index')->name('property.index');
+    Route::get('/advertise/create', 'AdvertisementController@create')->name('property.create');
+    Route::post('/', 'AdvertisementController@store')->name('property.store');
+    Route::get('/{id}', 'AdvertisementController@show')->name('property.show');
+    Route::get('/{id}/edit', 'AdvertisementController@edit')->name('property.edit');
+    Route::put('/{id}', 'AdvertisementController@update')->name('property.update');
+    Route::get('/{id}/archive', 'AdvertisementController@archive')->name('property.archive');
+});
 
 
 //SearchController
-Route::get('/search', 'SearchController@index');
-Route::get('/search/results', 'SearchController@search');
+Route::prefix('search')->middleware('auth')->group(function () {
+    Route::get('/', 'SearchController@index')->name('search');
+    Route::get('/results', 'SearchController@search')->name('search.results');
+});
 
 //Watchlist
-Route::get('/watchlist', 'WatchlistController@index')->middleware('auth');
-Route::get('/watchlist/create', 'WatchlistController@create')->middleware('auth');
-Route::post('/watchlist', 'WatchlistController@store')->middleware('auth');
-Route::get('/watchlist/{id}', 'WatchlistController@show')->middleware('auth');
-Route::get('/watchlist/{id}/edit', 'WatchlistController@edit')->middleware('auth');
-Route::put('/watchlist/{id}', 'WatchlistController@update')->middleware('auth');
-Route::get('/watchlist/{id}/delete', 'WatchlistController@destroy')->middleware('auth');
-Route::get('/watchlist/{image_info}/add', 'WatchedPropertiesController@create')->middleware('auth');;
+Route::prefix('watchlist')->middleware('auth')->group(function () {
+    Route::get('/', 'WatchlistController@index')->name('watchlist.results');
+    Route::get('/create', 'WatchlistController@create')->name('watchlist.create');
+    Route::post('/', 'WatchlistController@store')->name('watchlist.store');
+    Route::get('/{id}', 'WatchlistController@show')->name('watchlist.show');
+    Route::get('/{id}/edit', 'WatchlistController@edit')->name('watchlist.edit');
+    Route::put('/{id}', 'WatchlistController@update')->name('watchlist.update');
+    Route::get('/{id}/delete', 'WatchlistController@destroy')->name('watchlist.delete');
+    Route::get('/{image_info}/add', 'WatchedPropertiesController@create')->name('watchlist.add');
+});
 
 //Accounts or Tenancies
-Route::get('/account/{id}', 'AccountController@index')->middleware('auth');
-Route::get('/account/tenancy/{id}/create', 'AccountController@create')->middleware('auth');
-Route::post('/account/tenancy/{id}', 'AccountController@store')->middleware('auth');
-Route::post('/account/tenancy/{id}/accept', 'AccountController@accept')->middleware('auth');
-Route::post('/account/tenancy/{id}/reject', 'AccountController@reject')->middleware('auth');
-Route::post('/account/tenancy/{id}/end', 'AccountController@end')->middleware('auth');
+Route::prefix('account')->middleware('auth')->group(function () {
+    Route::get('/{id}', 'AccountController@index')->name('account.index');
+    Route::get('/tenancy/{id}/create', 'AccountController@create')->name('tenancy.create');
+    Route::post('/tenancy/{id}', 'AccountController@store')->name('tenancy.store');
+    Route::post('/tenancy/{id}/accept', 'AccountController@accept')->name('tenancy.accept');
+    Route::post('/tenancy/{id}/reject', 'AccountController@reject')->name('tenancy.reject');
+    Route::post('/tenancy/{id}/end', 'AccountController@end')->name('tenancy.delete');
+});
 
-Route::get('/user/search', 'AccountController@searchhome')->middleware('auth');
-Route::get('/user/search/results', 'AccountController@searchresults')->middleware('auth');
+Route::prefix('user')->middleware('auth')->group(function () {
+    Route::get('/search', 'AccountController@searchhome')->name('user.search');
+    Route::get('/search/results', 'AccountController@searchresults')->name('user.search.results');
+});
 
 //Routes for preference form
-Route::get('/preferance', 'TenantPreferanceController@index')->middleware('auth');
-Route::get('/account/preferance/create', 'TenantPreferanceController@create')->middleware('auth');
-Route::post('/account/preferance', 'TenantPreferanceController@store')->middleware('auth');
-Route::get('/account/preferance/{id}', 'TenantPreferanceController@show')->middleware('auth');
-Route::get('/account/preferance/{id}/edit', 'TenantPreferanceController@edit')->middleware('auth');
-Route::put('/account/preferance/{id}', 'TenantPreferanceController@update')->middleware('auth');
-Route::get('/account/preferance/{id}/delete', 'TenantPreferanceController@destroy')->middleware('auth');
+Route::prefix('preferance')->middleware('auth')->group(function () {
+    Route::get('/preferance', 'TenantPreferanceController@index')->name('preferance.index');
+    Route::get('/account/preferance/create', 'TenantPreferanceController@create')->name('preferance.create');
+    Route::post('/account/preferance', 'TenantPreferanceController@store')->name('preferance.store');
+    Route::get('/account/preferance/{id}', 'TenantPreferanceController@show')->name('preferance.show');
+    Route::get('/account/preferance/{id}/edit', 'TenantPreferanceController@edit')->name('preferance.edit');
+    Route::put('/account/preferance/{id}', 'TenantPreferanceController@update')->name('preferance.update');
+    Route::get('/account/preferance/{id}/delete', 'TenantPreferanceController@destroy')->name('preferance.delete');
+});
 
 //Expenses
-Route::get('/expenses', 'PropertyExpenseController@index')->middleware('auth');
-Route::get('/expenses/{id}/create', 'PropertyExpenseController@create')->middleware('auth');
-Route::post('/expenses', 'PropertyExpenseController@store')->middleware('auth');
-Route::get('/expenses/property/{id}', 'PropertyExpenseController@show')->middleware('auth');
-Route::get('/chart', 'PropertyExpenseController@chart');
+Route::prefix('expenses')->middleware('auth')->group(function () {
+    Route::get('/', 'PropertyExpenseController@index')->name('expenses.index');
+    Route::get('/{id}/create', 'PropertyExpenseController@create')->name('expenses.create');
+    Route::post('/', 'PropertyExpenseController@store')->name('expenses.store');
+    Route::get('/property/{id}', 'PropertyExpenseController@show')->name('expenses.show');
+    Route::get('/chart', 'PropertyExpenseController@chart')->name('expenses.chart');
+});
 
 //Feedback
-Route::get('/feedback', 'FeedbackController@index')->middleware('auth');
-Route::get('/feedback/create', 'FeedbackController@create')->middleware('auth');
-Route::post('/feedback', 'FeedbackController@store')->middleware('auth');
-Route::get('/feedback/results/{id}', 'FeedbackController@show')->middleware('auth');
+Route::prefix('feedback')->middleware('auth')->group(function () {
+    Route::get('/', 'FeedbackController@index')->name('feedback.index');
+    Route::get('/create', 'FeedbackController@create')->name('feedback.index');
+    Route::post('/', 'FeedbackController@store')->name('feedback.index');
+    Route::get('/results/{id}', 'FeedbackController@show')->name('feedback.index');
+});
 
 //Messages
-Route::get('/messages/index', 'MessageController@index')->middleware('auth');
-Route::get('/messages/{id}/create', 'MessageController@create')->middleware('auth');
-Route::post('/messages', 'MessageController@store')->middleware('auth');
-Route::get('/messages/show/{id}', 'MessageController@show')->middleware('auth');
-Route::get('/messages/inbox', 'MessageController@inbox')->middleware('auth');
-Route::get('/messages/sentbox', 'MessageController@sentbox')->middleware('auth');
+Route::prefix('messages')->middleware('auth')->group(function () {
+    Route::get('/index', 'MessageController@index')->name('messages.index');
+    Route::get('/{id}/create', 'MessageController@create')->name('messages.create');
+    Route::post('/', 'MessageController@store')->name('messages.store');
+    Route::get('/show/{id}', 'MessageController@show')->name('messages.show');
+    Route::get('/inbox', 'MessageController@inbox')->name('messages.inbox');
+    Route::get('/sentbox', 'MessageController@sentbox')->name('messages.sentbox');
+});
+
 
 //ExpenseClaimer
-Route::get('/expenseclaim/home', 'ExpenseClaimerController@index')->middleware('auth');
-Route::get('/expenseclaim/create', 'ExpenseClaimerController@create')->middleware('auth');
-Route::post('/expenseclaim', 'ExpenseClaimerController@store')->middleware('auth');
-Route::get('/expenseclaim/show/{id}', 'ExpenseClaimerController@show')->middleware('auth');
-Route::get('/expenseclaim/{id}/edit', 'ExpenseClaimerController@edit')->middleware('auth');
-Route::put('/expenseclaim/{id}', 'ExpenseClaimerController@update')->middleware('auth');
-//Changing status
-Route::get('/expenseclaim/{id}/approve', 'ExpenseClaimerController@approve')->middleware('auth');
-Route::put('/expenseclaim/show/{id}', 'ExpenseClaimerController@changeStatus')->middleware('auth');
-
+Route::prefix('expenseclaim')->middleware('auth')->group(function () {
+    Route::get('/home', 'ExpenseClaimerController@index')->name('expenseclaim.index');
+    Route::get('/create', 'ExpenseClaimerController@create')->name('expenseclaim.create');
+    Route::post('/', 'ExpenseClaimerController@store')->name('expenseclaim.store');
+    Route::get('/show/{id}', 'ExpenseClaimerController@show')->name('expenseclaim.show');
+    Route::get('/{id}/edit', 'ExpenseClaimerController@edit')->name('expenseclaim.edit');
+    Route::put('/{id}', 'ExpenseClaimerController@update')->name('expenseclaim.update');
+    Route::get('/{id}/approve', 'ExpenseClaimerController@approve')->name('expenseclaim.approve');
+    Route::put('/show/{id}', 'ExpenseClaimerController@changeStatus')>name('expenseclaim.change.status');
+});
 
 //Charts
-Route::get('/aggregatedpropertyoverview', 'ChartsController@AggregatedPropertyOverview');
-Route::get('/uniquepropertyoverview/{id}', 'ChartsController@uniquePropertyOverview');
-
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/aggregatedpropertyoverview', 'ChartsController@AggregatedPropertyOverview');
+    Route::get('/uniquepropertyoverview/{id}', 'ChartsController@uniquePropertyOverview');
+});
 
 //Route::get('select2-autocomplete', 'Select2AutocompleteController@layout');
 // Route::get('/townsearch', 'AdvertisementController@townload');
