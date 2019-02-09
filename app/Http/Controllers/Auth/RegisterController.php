@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use \Spatie\Permission\Models\Role;
 
 class RegisterController extends Controller
 {
@@ -39,6 +40,12 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm()
+    {
+        $roles = Role::where('name', '!=', 'administrator')->get();
+        return view('auth.register', compact('roles'));
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -60,12 +67,14 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
+
     protected function create(array $data)
     {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password'])
+            'password' => bcrypt($data['password']),
+            'approved' => 0
         ]);
     }
 }

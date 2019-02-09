@@ -40,6 +40,25 @@
                                 @endif
                             </div>
                         </div>
+
+                        <!-- User Type -->
+                        <div class="form-group row">
+                            <label for="account_application_type" class="col-md-4 col-form-label text-md-right">Account Type</label>
+                            <div class="col-md-6">
+                            <select class="form-control" id="account_application_type" name="account_application_type">
+                                @foreach ($roles as $role)
+                                    <option value="{{$role->value}}">{{$role->name}}</option>
+                                @endforeach
+                            </select>
+
+                            @if ($errors->has('account_application_type'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('account_application_type') }}</strong>
+                                </span>
+                            @endif
+                            </div>
+                        </div>
+                            
                         
                         <!-- Password -->
                         <div class="form-group row">
