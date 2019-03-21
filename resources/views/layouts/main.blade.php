@@ -75,9 +75,11 @@
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-bell"></i></a>
               <div class="dropdown-menu">
-                @foreach ($notifications as $notification)                
+                {{-- @forelse ($notifications as $notification)                
                   <a class="dropdown-item">{{$notification->message}}</a>
-                @endforeach
+                @empty
+                  <a class="dropdown-item">No Notifications.</a>
+                @endforelse --}}
 
               </div>
           </li>

@@ -27,6 +27,7 @@ Route::prefix('property')->group(function () {
     });
 });
 
+Route::get('/jobs', 'PageController@jobs');
 
 //SearchController
 Route::prefix('search')->middleware(['auth', 'account.approved'])->group(function () {
